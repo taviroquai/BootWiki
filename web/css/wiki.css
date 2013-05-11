@@ -5,6 +5,9 @@
     Description:
         Purpose of the stylesheet follows.
 */
+.hero-unit h1 {
+    font-size: 3.5em;
+}
 
 a:hover {
   color: #af7616;
