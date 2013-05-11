@@ -40,7 +40,7 @@ define('ORGANIZATION_FOUNDER',  'Founder');
  * Register and mail configuration
  */
 define('REGISTER_ALLOWED',  1);
-define('ENCRYPT_SALT',      time());
+define('ENCRYPT_SALT',      'wiki');
 define('SEND_MAILS',        0);
 define('EMAIL_HOST',        '');
 define('EMAIL_SMTP',        1);
