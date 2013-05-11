@@ -32,7 +32,8 @@ class Results extends Block {
         $sql = 'SELECT content.* FROM content JOIN idiom ON content.idiom_id = idiom.id
             WHERE idiom.code = ? AND content.publish = 1 
                 AND (
-                    content.alias like (?) 
+                    content.keywords like (?)
+                    OR content.alias like (?) 
                     OR content.title like (?)
                     OR content.description like (?)
                     OR content.intro like (?)
@@ -42,7 +43,7 @@ class Results extends Block {
         
         // Prepare values and run query
         $q = "%$q%";
-        $rows = R::getAll($sql, array(BootWiki::getIdiom(), $q, $q, $q, $q, $q));
+        $rows = R::getAll($sql, array(BootWiki::getIdiom(), $q, $q, $q, $q, $q, $q));
         $results = R::convertToBeans('content', $rows);
         if (!empty($results)) {
             foreach ($results as $item) {
