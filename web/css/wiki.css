@@ -1,0 +1,53 @@
+/* 
+    Document   : wiki
+    Created on : 8/Mai/2013, 1:12:14
+    Author     : mafonso
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+a:hover {
+  color: #af7616;
+  text-decoration: none;
+}
+
+.media-list {
+    list-style-type: none;
+}
+
+.media-object {
+    padding: 10px;
+}
+
+.wiki-img-featured {
+    min-width: 280px;
+}
+
+.wiki-img-featured-big {
+    min-width: 280px;
+}
+
+.wiki-edit-link {
+    font-size: 10px;
+}
+
+.wiki-search {
+    padding: 0 15px;
+}
+
+.wiki-date-min {
+    font-size: 60%;
+    background-color: gray;
+}
+
+.wiki-visits-min, .wiki-label-min {
+    font-size: 60%;
+}
+
+.wiki-media-object-img {
+    max-width: 64px;
+}
+
+#wiki-unpublished a {
+    color: red !important;
+}

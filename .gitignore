@@ -1,0 +1,10 @@
+/composer.lock
+/config.php
+/download.php
+/vendor/
+/db/wiki.sqlite
+/nbproject/private/
+/web/data/arturo_sandoval_trumpet_evolution.jpg
+/web/data/mail.log
+/web/data/avatar.jpg
+/web/data/

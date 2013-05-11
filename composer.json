@@ -1,0 +1,7 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "gabordemooij/redbean": "dev-master",
+        "phpmailer/phpmailer": "dev-master"
+    }
+}
