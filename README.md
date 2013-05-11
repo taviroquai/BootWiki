@@ -19,4 +19,7 @@ Open http://localhost/bootwiki/install
 
 Done!
 
+Open http://url-to-bootwiki/install
+Login with admin user and admin password
+
 Comments and help are appreciated.
