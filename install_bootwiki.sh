@@ -28,3 +28,4 @@ chmod -R 2775 db
 
 echo "Done!"
 echo "IMPORTANT: Please open config.php and setup your settings."
+echo "DON'T FORGET to remove install_bootwiki.sh and edit index.php to remove install path."
