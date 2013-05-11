@@ -163,7 +163,8 @@ class BootWiki {
     public static function install() {
         
         R::nuke(); // WARNING: THIS WILL DELETE YOUR DATA!!!
-    
+        R::debug(true);
+        
         $account = R::dispense('account');
         $account->username = 'admin';
         $account->password = self::encrypt('admin');
@@ -177,28 +178,63 @@ class BootWiki {
         $idiom_en->flag_image = 'web/img/flags/United_Kingdom.png';
         R::store ($idiom_en);
 
-        $content = new Content('Welcome to Wiki!');
+        $content = new Content('Welcome to Wiki!', 
+                '<p>A Wiki built upon Twitter Bootstrap, RedBeanPHP and Slim Framework</p>');
+        $content->intro = '<p>A very basic but nice Wiki for you organization</p>';
+        $content->description = 'A very basic but nice Wiki for you organization';
+        $content->keywords = 'wiki bootstrap redbeanphp slim nice simple organizarion';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
         $content->author = $account->username;
         $bean = R::dispense('content');
         R::store($content->exportToBean($bean));
 
-        $content = new Content('Wiki Features');
+        $content = new Content('Wiki Features', 
+                '<ul><li>Add text and image content</li>
+                    <li>Most recent list</li>
+                    <li>Most popular list</li>
+                    <li>Keywords search</li>
+                    <li>WYSIHTML5 editor</li>
+                    <li>Multi-idiom</li>
+                    <li>Configure homepage featured content</li>
+                    <li>Versioning</li></ul>');
+        $content->intro = '<p>Look at the features that are essencial to a good and organized content.</p>';
+        $content->description = 'Look at the features that are essencial to a good and organized content';
+        $content->keywords = 'wiki features text image wysihtml5 multi idiom featured versioning';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
         $content->author = $account->username;
         $bean = R::dispense('content');
         R::store($content->exportToBean($bean));
 
-        $content = new Content('How To Install');
+        $content = new Content('How To Install', 
+                '<p>Dependencies: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git</p>
+                <p>How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:</p>
+                <p><code>
+                sudo su<br />
+                mkdir /var/www/bootwiki<br />
+                cd /var/www/bootwiki<br />
+                git clone https://github.com/taviroquai/BootWiki.git .<br />
+                ./install_bootwiki.sh<br />
+                Open config.php and change to your configuration, including MAIL configuration<br />
+                </code></p>
+                <p>Open http://localhost/bootwiki/install</p>
+                <p>Done!</p>
+                <p>Open http://url-to-bootwiki/install Login with admin user and admin password</p>');
+        $content->intro = '<p>Follow the few steps to install on a DEBIAN / UBUNTU linux distribution</p>';
+        $content->description = 'Follow the few steps to install on a DEBIAN / UBUNTU linux distribution';
+        $content->keywords = 'wiki install steps ubuntu debian';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
         $content->author = $account->username;
         $bean = R::dispense('content');
         R::store($content->exportToBean($bean));
 
-        $content = new Content('Documentation');
+        $content = new Content('Documentation',
+                '<p>Source code is at <a href="http://github.com/taviroquai/BootWiki">BootWiki on GitHub!</p>');
+        $content->intro = '<p>See the documentation, yet in development, for BootWiki usage</p>';
+        $content->description = 'See the documentation, yet in development, for BootWiki usage';
+        $content->keywords = 'wiki documentation';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
         $content->author = $account->username;
@@ -212,28 +248,64 @@ class BootWiki {
         $idiom_pt->flag_image = 'web/img/flags/Portugal.png';
         R::store ($idiom_pt);
 
-        $content = new Content('Bem-vindo à Wiki!');
+        $content = new Content('Bem-vindo à Wiki!',
+                '<p>A Wiki built upon Twitter Bootstrap, RedBeanPHP and Slim Framework</p>');
+        $content->intro = '<p>Uma Wiki muito básica mas bonita para a sua organização</p>';
+        $content->description = 'Uma Wiki muito básica mas bonita para a sua organização';
+        $content->keywords = 'wiki bootstrap redbeanphp slim bonita simples organização';
         $content->idiom = new Idiom($idiom_pt->code);
         $content->featured = 1;
         $content->author = $account->username;
         $bean = R::dispense('content');
         R::store($content->exportToBean($bean));
 
-        $content = new Content('Funcionalidades');
+        $content = new Content('Funcionalidades', 
+                '<ul><li>Adição de conteúdo</li>
+                    <li>Listagem por mais recentes</li>
+                    <li>Listagem por mais vistos</li>
+                    <li>Pesquisa por palavras-chave</li>
+                    <li>Editor WYSIHTML5</li>
+                    <li>Upload de imagens</li>
+                    <li>Multi-idioma</li>
+                    <li>Configuração de destaques na homepage</li>
+                    <li>Sistema de revisões</li></ul>');
+        $content->intro = '<p>Veja as funcionalidades que são essenciais para uma uma boa apresentação de conteúdo</p>';
+        $content->description = 'Veja as funcionalidades que são essenciais para uma uma boa apresentação de conteúdo';
+        $content->keywords = 'wiki funcionalidades texto image wysihtml5 multi idioma destaques reviões';
         $content->idiom = new Idiom($idiom_pt->code);
         $content->featured = 1;
         $content->author = $account->username;
         $bean = R::dispense('content');
         R::store($content->exportToBean($bean));
 
-        $content = new Content('Como instalar');
+        $content = new Content('Como instalar', 
+                '<p>Dependências: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git</p>
+                <p>Como instalar (DEBIAN/UBUNTU) em /var/www/bootwiki:</p>
+                <p><code>
+                sudo su<br />
+                mkdir /var/www/bootwiki<br />
+                cd /var/www/bootwiki<br />
+                git clone https://github.com/taviroquai/BootWiki.git .<br />
+                ./install_bootwiki.sh<br />
+                Open config.php and change to your configuration, including MAIL configuration<br />
+                </code></p>
+                <p>Open http://localhost/bootwiki/install</p>
+                <p>Done!</p>
+                <p>Open http://url-to-bootwiki/install Login with admin user and admin password</p>');
+        $content->intro = '<p>Siga os simples passos de instalação para DEBIAN / UBUNTU</p>';
+        $content->description = 'Siga os simples passos de instalação para DEBIAN / UBUNTU';
+        $content->keywords = 'wiki install ubuntu debian';
         $content->idiom = new Idiom($idiom_pt->code);
         $content->featured = 1;
         $content->author = $account->username;
         $bean = R::dispense('content');
         R::store($content->exportToBean($bean));
 
-        $content = new Content('Documentação');
+        $content = new Content('Documentação',
+                '<p>Código fonte em <a href="http://github.com/taviroquai/BootWiki">BootWiki no GitHub!</p>');
+        $content->intro = '<p>Veja a documentação, ainda em desenvolvimento, para a utilização da BootWiki</p>';
+        $content->description = 'Veja a documentação, ainda em desenvolvimento, para a utilização da BootWiki';
+        $content->keywords = 'wiki documentação';
         $content->idiom = new Idiom($idiom_pt->code);
         $content->featured = 1;
         $content->author = $account->username;
