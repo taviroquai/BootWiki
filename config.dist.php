@@ -14,6 +14,7 @@ define('BASEURL', '/bootwiki');
 define('DBPATH', '/var/www/bootwiki/db/wiki.sqlite');
 define('DATAPATH', '/var/www/bootwiki/web/data');
 define('DATAURL', '/web/data');
+define('TEMPLATEPATH', '/var/www/bootwiki/template');
 
 /*
  * Database configuration
