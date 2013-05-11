@@ -11,7 +11,7 @@ How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:
 2. mkdir /var/www/bootwiki
 3. cd /var/www/bootwiki
 4. git clone https://github.com/taviroquai/BootWiki.git .
-5. ./install.sh
+5. ./install_bootwiki.sh
 
 Open config.php and change to your configuration, including MAIL configuration
 
