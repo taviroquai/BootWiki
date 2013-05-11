@@ -3,17 +3,15 @@ BootWiki
 
 A Wiki built upon Twitter Bootstrap, RedBeanPHP and Slim Framework
 
-Dependencies: Apache + PHP5.3 + Sqlite (or LAMP) and Composer
+Dependencies: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git
 
-To install (LINUX) under /var/www/bootwiki:
+How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:
 
-1. cd to /var/www/bootwiki
+1. mkdir /var/www/bootwiki
 2. sudo su
-2. composer install
-3. mv config.dist.php config.php
-4. mv web/data.dist web/data
-5. mkdir db
-6. chown -R www-data db
+3. cd /var/www/bootwiki
+4. git clone https://github.com/taviroquai/BootWiki.git .
+5. ./install.sh
 
 Open config.php and change to your configuration, including MAIL configuration
 

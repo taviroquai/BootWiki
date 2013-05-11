@@ -1,6 +1,9 @@
 <div>
     <h1>Register Complete!</h1>
-    <p>Thank you for registering. An email was sent to confirm your account.</p>
+    <p>Thank you for registering.</p>
+    <? if (SEND_MAILS) { ?>
+    <p>An email was sent with your login details.</p>
+    <? } ?>
     
     <? if (!empty($this->message)) : ?>
     <div class="control-group error" id="login_error">

@@ -251,6 +251,8 @@ class BootWiki {
      */
     public static function sendMail($to, $subject, $message) {
         
+        if (!SEND_MAILS) return true;
+        
         $mail = new PHPMailer;
 
         if (EMAIL_SMTP) {
