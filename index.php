@@ -110,10 +110,10 @@ $app->get('/:alias', function ($alias) use ($app) {
     $layout->loadPopular();
     
     // Add SEO
-    $layout->title = $main->title;
-    $layout->description = $main->description;
-    $layout->keywords = implode(',', explode(' ', $main->keywords));
-    $layout->author = $main->author;
+    $layout->title = $main->content->title;
+    $layout->description = $main->content->description;
+    $layout->keywords = implode(',', explode(' ', $main->content->keywords));
+    $layout->author = $main->content->author;
     
     // Print layout
     $app->response()->body((string)$layout);
