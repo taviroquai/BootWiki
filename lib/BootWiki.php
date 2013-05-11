@@ -166,7 +166,7 @@ class BootWiki {
     
         $account = R::dispense('account');
         $account->username = 'admin';
-        $account->password = sha1('admin');
+        $account->password = self::encrypt('admin');
         $account->displayname = 'Admin';
         R::store ($account);
 
@@ -310,7 +310,7 @@ class BootWiki {
      * @return string
      */
     public static function encrypt($str) {
-        return sha1($str);
+        return sha1($str.ENCRYPT_SALT);
     }
     
     /**
