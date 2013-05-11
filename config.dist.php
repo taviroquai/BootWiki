@@ -19,7 +19,7 @@ define('TEMPLATEPATH',  APPPATH.'/template');
 /*
  * Database configuration
  */
-define('DBDSN',     'sqlite:/var/www/bootwiki/db/wiki.sqlite');
+define('DBDSN',     'sqlite:'.APPPATH.'/db/wiki.sqlite');
 //define('DBDSN',   'mysql:host=localhost;dbname=bootwiki');
 define('DBUSER',    '');
 define('DBPASS',    '');
