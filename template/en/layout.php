@@ -114,8 +114,11 @@
                 <div class="wiki-search">
                     <div class="nav-header">Search...</div>
                     <form class="form-search" action="search">
-                        <input type="text" name="q" value="<?=empty($this->query) ? '' : $this->query?>"class="input-medium search-query">
-                        <button type="submit" class="btn">Go</button>
+                        <div class="input-append">
+                            <input class="span9" type="text" name="q"
+                                   value="<?=empty($this->query) ? '' : $this->query?>">
+                            <button class="btn" type="submit">Search</button>
+                        </div>
                     </form>
                 </div>
             </div><!--/.well -->
