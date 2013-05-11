@@ -16,9 +16,12 @@
               rel="author" href="<?=$this->content->author->profile?>"
               <? } ?>>
     </p>
+    <span itemprop="primaryImageOfPage" itemscope itemtype="ImageObject" 
+         id="content_image" class="pull-right" style="text-align: center;">
+                <?=!empty($this->content->image) ? $this->content->image->html() : ''?></span>
     <div itemprop="description" id="content_intro"><?=$this->content->intro?></div>
-    <p itemprop="primaryImageOfPage" itemscope itemtype="ImageObject" id="content_image" style="text-align: center;"><?=$this->content->image->html()?></p>
     <div itemprop="text" id="content_body"><?=$this->content->html?></div>
+    <div class="clearfix"></div>
     <p class="well" itemprop="keywords"><?=$this->content->keywordsToLabels()?></p>
 </div>
 
