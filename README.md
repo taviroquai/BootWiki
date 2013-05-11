@@ -19,4 +19,4 @@ Open http://localhost/bootwiki/install
 
 Done!
 
-Comments and help is appreciated.
+Comments and help are appreciated.
