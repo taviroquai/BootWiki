@@ -7,8 +7,8 @@ Dependencies: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git
 
 How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:
 
-1. mkdir /var/www/bootwiki
-2. sudo su
+1. sudo su
+2. mkdir /var/www/bootwiki
 3. cd /var/www/bootwiki
 4. git clone https://github.com/taviroquai/BootWiki.git .
 5. ./install.sh
