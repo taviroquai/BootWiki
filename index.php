@@ -89,10 +89,10 @@ $app->get('/search', function () use ($app) {
 $app->get('/:alias', function ($alias) use ($app) {
     
     $content = new Content();
-    $result = $content->load($alias);
-    if (!$result) {
+    $content = $content->load($alias);
+    if (!$content) {
         if (BootWiki::getLoggedAccount() == null) {
-            $main->template_path = BootWiki::template('404');
+            $app->redirect(BASEURL.'/mod/404');
         }
         else {
             $alias = Content::createAlias($alias);
@@ -102,7 +102,7 @@ $app->get('/:alias', function ($alias) use ($app) {
     
     // Load content
     $main = new Detail();
-    $main->visit($content);
+    $main->visit($content); 
     
     // Load layout
     $layout = new Layout($main);
@@ -120,6 +120,23 @@ $app->get('/:alias', function ($alias) use ($app) {
 });
 
 /*
+ * Display 404 not found content
+ */
+$app->get('/mod/404', function () use ($app) {
+    
+    // Load content
+    $main = new Block('404');
+    
+    // Load layout
+    $layout = new Layout($main);
+    $layout->loadRecent();
+    $layout->loadPopular();
+    
+    // Print layout
+    $app->response()->body((string)$layout);
+});
+
+/*
  * Display content form
  */
 $app->get('/edit/:alias(/:version)', function ($alias, $version_id = null) use ($app) {
@@ -128,9 +145,9 @@ $app->get('/edit/:alias(/:version)', function ($alias, $version_id = null) use (
     if (BootWiki::getLoggedAccount() == null) $app->redirect(BASEURL);
     
     // Define content
-    $content = new Content();
+    $content = new Content($alias);
     if (!empty($version_id)) $content->loadVersion ($version_id);
-    else $content->load($alias);
+    else $content->load($alias, true);
     
     // Set up form
     $form = new ContentForm();
@@ -156,7 +173,7 @@ $app->post('/edit/:alias', function ($alias) use ($app) {
 
     // load content to edit
     $content = new Content();
-    $content->load($alias);
+    $content->load($alias, TRUE);
     $content->savePost($_POST['content'], $_FILES['upload_image']);
     
     // Load form

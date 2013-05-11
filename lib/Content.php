@@ -66,13 +66,16 @@ class Content extends Link {
      * @param string $alias
      * @return \ContentForm
      */
-    public function load($alias) {
+    public function load($alias, $create = false) {
         // Try to load content
         $content = R::findOne('content', 'alias = ?', array($alias));
-        if (empty($content)) {
-            $this->publish = 0;
-            $this->author = BootWiki::getLoggedAccount()->username;
+        if (empty($content) && $create) {
+            $content = R::dispense('content');
+            if (BootWiki::getLoggedAccount()) {
+                $this->author = BootWiki::getLoggedAccount()->username;
+            }
         }
+        if (!$content) return false;
         $this->importBean($content);
         return $this;
     }
@@ -122,28 +125,29 @@ class Content extends Link {
         // Import fields (ugly i know)
         $fields = 'title,alias,publish,featured,date,description,keywords,author,intro,html';
         // Find record
-        $content = R::findOne('content', 'alias = ?', array($this->alias));
-        if (empty($content)) {
-            $content = R::dispense('content');
+        $bean = R::findOne('content', 'alias = ?', array($this->alias));
+        if (empty($bean)) {
+            $bean = R::dispense('content');
         }
         else {
             // Save last version
             $version = R::dispense('contentversion');
-            $version->import($content->export(), $fields);
+            $version->import($bean->export(), $fields);
             $version->date = date('Y-m-d H:i:s');
-            $version->content = $content;
+            $version->content = $bean;
             R::store($version);
         }
 
         // Import changes
-        $content->import($post, $fields);
-        $content->idiom = R::findOne('idiom', 'code = ?', array($post['idiom']));
+        $bean->import($post, $fields);
+        $bean->idiom = R::findOne('idiom', 'code = ?', array($post['idiom']));
         $new_image = Image::upload($upload_image);
-        if ($new_image) $content->image = $new_image;
+        if ($new_image) $bean->image = $new_image;
 
         // Save
         try {
-            R::store($content);
+            R::store($bean);
+            $this->importBean($bean);
         } catch (Exception $e) {
             BootWiki::setMessage($e->getMessage());
         }

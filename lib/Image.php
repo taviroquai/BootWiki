@@ -54,7 +54,6 @@ class Image extends Link {
      * @return boolean
      */
     static function upload($file) {
-        var_dump($file);
         if ($file['error']) return false;
         $destination = DATAPATH.'/'.$file['name'];
         if (move_uploaded_file($file['tmp_name'], $destination)) {
