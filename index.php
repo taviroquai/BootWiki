@@ -88,8 +88,8 @@ $app->get('/search', function () use ($app) {
  */
 $app->get('/:alias', function ($alias) use ($app) {
     
-    $main = new Detail();
-    $result = $main->find($alias);
+    $content = new Content();
+    $result = $content->load($alias);
     if (!$result) {
         if (BootWiki::getLoggedAccount() == null) {
             $main->template_path = BootWiki::template('404');
@@ -99,6 +99,10 @@ $app->get('/:alias', function ($alias) use ($app) {
             $app->redirect(BASEURL.'/edit/'.$alias);
         }
     }
+    
+    // Load content
+    $main = new Detail();
+    $main->visit($content);
     
     // Load layout
     $layout = new Layout($main);
@@ -124,13 +128,16 @@ $app->get('/edit/:alias(/:version)', function ($alias, $version_id = null) use (
     if (BootWiki::getLoggedAccount() == null) $app->redirect(BASEURL);
     
     // Define content
-    $main = new ContentForm();
-    $main->loadIdioms();
-    if (!empty($version_id)) $main->loadVersion ($version_id);
-    else $main->load($alias);
+    $content = new Content();
+    if (!empty($version_id)) $content->loadVersion ($version_id);
+    else $content->load($alias);
+    
+    // Set up form
+    $form = new ContentForm();
+    $form->edit($content);
     
     // Load layout
-    $layout = new Layout($main);
+    $layout = new Layout($form);
     $layout->loadRecent();
     $layout->loadPopular();
     $layout->loadUnpublished();
@@ -147,13 +154,23 @@ $app->post('/edit/:alias', function ($alias) use ($app) {
     // redirect if not logged
     if (BootWiki::getLoggedAccount() == null) $app->redirect(BASEURL);
 
-    // Process form
-    $form = new ContentForm();
-    $form->load($alias);
-    $form->save($_POST['content'], $_FILES['upload_image']);
+    // load content to edit
+    $content = new Content();
+    $content->load($alias);
+    $content->savePost($_POST['content'], $_FILES['upload_image']);
     
-    // Redirect to edit
-    $app->redirect(BASEURL.'/edit/'.$alias);
+    // Load form
+    $form = new ContentForm();
+    $form->edit($content);
+    
+    // Load layout
+    $layout = new Layout($form);
+    $layout->loadRecent();
+    $layout->loadPopular();
+    $layout->loadUnpublished();
+    
+    // Print layout
+    $app->response()->body((string)$layout);
 });
 
 /*
@@ -198,8 +215,8 @@ $app->get('/mod/register', function () use ($app) {
         $app->redirect(BASEURL);
     }
     
-    // Load authentication form
-    $main = new Account();
+    // Load registration form
+    $main = new Block('register_form');
     
     // Load layout
     $layout = new Layout($main);
@@ -224,21 +241,23 @@ $app->post('/mod/register', function () use ($app) {
     // Process login
     $main = new Account();
     $result = $main->create($app->request()->post());
-
-    // Apply redirects
-    if (!$result) $app->redirect(BASEURL.'/mod/register');
+    if (!$result) {
+        // Load registration form
+        $main = new Block('register_form');
+    }
     else {
         // Load register done template
-        $main->template_path = BootWiki::template('register_done');
-        
-        // Load layout
-        $layout = new Layout($main);
-        $layout->loadRecent();
-        $layout->loadPopular();
-
-        // Print layout
-        $app->response()->body((string)$layout);
+        $main = new Block('register_done');
     }
+    
+    // Load layout
+    $layout = new Layout($main);
+    $layout->loadRecent();
+    $layout->loadPopular();
+
+    // Print layout
+    $app->response()->body((string)$layout);
+
 });
 
 /*
@@ -250,8 +269,7 @@ $app->get('/mod/myaccount', function () use ($app) {
     if (BootWiki::getLoggedAccount() == null) $app->redirect(BASEURL);
     
     // Load authentication form
-    $main = new Account();
-    $main->template_path = BootWiki::template('changepw_form');
+    $main = new Block('changepw_form');
     
     // Load layout
     $layout = new Layout($main);

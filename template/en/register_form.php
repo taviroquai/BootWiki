@@ -3,14 +3,20 @@
 
 <form action="" method="post">
     <label>Email</label>
-    <input name="username" type="text" value="<?=empty($_POST['username']) ? '' : $_POST['username']?>" />
+    <input name="username" required type="text" placeholder="Email"
+           value="<?=empty($_POST['username']) ? '' : $_POST['username']?>" />
     <label>Display Name</label>
-    <input name="displayname" type="text" value="<?=empty($_POST['displayname']) ? '' : $_POST['displayname']?>" />
+    <input name="displayname" required type="text" placeholder="Display name"
+           value="<?=empty($_POST['displayname']) ? '' : $_POST['displayname']?>" />
+    
+    <label>Social profile link</label>
+    <input name="profile" type="text" placeholder="Social profile link"
+           value="<?=empty($_POST['profile']) ? '' : $_POST['profile']?>" />
     
     <label>Password</label>
-    <input name="password" type="password" />
+    <input name="password" type="password" required placeholder="Password" />
     <label>Confirme Password</label>
-    <input name="password_confirm" type="password" />
+    <input name="password_confirm" type="password" required placeholder="Confirm password" />
 
     <label></label>
 
@@ -29,6 +35,7 @@
     </script>
     <? endif; ?>
 
+    <input type="text" name="reserved" style="display: none" />
     <button type="submit">Register</button>
 </form>
 <? BootWiki::clearMessage(); ?>

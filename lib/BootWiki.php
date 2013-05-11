@@ -163,12 +163,13 @@ class BootWiki {
     public static function install() {
         
         R::nuke(); // WARNING: THIS WILL DELETE YOUR DATA!!!
-        R::debug(true);
+        //R::debug(true);
         
         $account = R::dispense('account');
         $account->username = 'admin';
         $account->password = self::encrypt('admin');
         $account->displayname = 'Admin';
+        $account->profile = '';
         R::store ($account);
 
         // English content

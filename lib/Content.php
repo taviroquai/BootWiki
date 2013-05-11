@@ -62,6 +62,103 @@ class Content extends Link {
     }
     
     /**
+     * Loads content to the form based on Content alias unique key
+     * @param string $alias
+     * @return \ContentForm
+     */
+    public function load($alias) {
+        // Try to load content
+        $content = R::findOne('content', 'alias = ?', array($alias));
+        if (empty($content)) {
+            $this->publish = 0;
+            $this->author = BootWiki::getLoggedAccount()->username;
+        }
+        $this->importBean($content);
+        return $this;
+    }
+        
+    /**
+     * Loads content to the form based on a Content version
+     * @param int $version_id
+     * @return boolean|\ContentForm
+     */
+    public function loadVersion($version_id) {
+        
+        // Try to load content
+        $version = R::findOne('contentversion', 'id = ?', array($version_id));
+        if (empty($version)) return false;
+            
+        $this->importBean($version);
+        $this->date = reset(explode(' ', $this->date));
+        return $this;
+    }
+    
+    /**
+     * Adds visits to this content
+     * @param int $quantity
+     */
+    public function addVisits($quantity = 1) {
+        // Update visits
+        $this->visits = $this->visits + $quantity;
+    }
+    
+    /**
+     * Load content versions
+     * @return array
+     */
+    public function loadVersions() {
+        $bean = R::findOne('content', 'alias = ?', array($this->alias));
+        if (empty($bean)) return array();
+        return R::find('contentversion', '1 AND content_id = ?', array($bean->id));
+    }
+    
+    /**
+     * Saves form data
+     * @param array $post
+     * @param array $upload_image
+     */
+    public function savePost($post, $upload_image) {
+        
+        // Import fields (ugly i know)
+        $fields = 'title,alias,publish,featured,date,description,keywords,author,intro,html';
+        // Find record
+        $content = R::findOne('content', 'alias = ?', array($this->alias));
+        if (empty($content)) {
+            $content = R::dispense('content');
+        }
+        else {
+            // Save last version
+            $version = R::dispense('contentversion');
+            $version->import($content->export(), $fields);
+            $version->date = date('Y-m-d H:i:s');
+            $version->content = $content;
+            R::store($version);
+        }
+
+        // Import changes
+        $content->import($post, $fields);
+        $content->idiom = R::findOne('idiom', 'code = ?', array($post['idiom']));
+        $new_image = Image::upload($upload_image);
+        if ($new_image) $content->image = $new_image;
+
+        // Save
+        try {
+            R::store($content);
+        } catch (Exception $e) {
+            BootWiki::setMessage($e->getMessage());
+        }
+    }
+    
+    /**
+     * Uses database to save current data
+     */
+    public function save() {
+        $bean = R::findOne('content', 'alias = ?', array($this->alias));
+        $bean = $this->exportToBean($bean);
+        return R::store($bean);
+    }
+    
+    /**
      * This will allow to import RedBean OODBBean objects
      * @param RedBean_OODBBean $bean
      */
@@ -71,6 +168,14 @@ class Content extends Link {
         $idiom = $bean->idiom;
         $this->idiom = new Idiom();
         $this->idiom->importBean($idiom);
+        
+        // load author
+        $result = R::findOne('account', 'username = ?', array($this->author));
+        if (!empty($result)) {
+            $author = new Account();
+            $author->importBean($result);
+            $this->author = $author;
+        }
     }
     
     /**

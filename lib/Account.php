@@ -7,7 +7,7 @@
  */
 use RedBean_Facade as R;
 
-class Account extends Block {
+class Account extends Link {
     
     /**
      * Account username
@@ -28,6 +28,12 @@ class Account extends Block {
      */
     public $displayname;
     
+    /**
+     * Person profile social address
+     * @var string
+     */
+    public $profile;
+    
     public function __construct() {
         parent::__construct('register_form');
     }
@@ -47,6 +53,7 @@ class Account extends Block {
         $account = R::dispense('account');
         $account->username = $post['username'];
         $account->displayname = $post['displayname'];
+        $account->profile = $post['profile'];
         $account->password = $post['password'];
         $this->importBean($account);
         
@@ -102,6 +109,13 @@ class Account extends Block {
      * @return boolean
      */
     public function validateCreate($post) {
+        
+        // Check security system
+        if (!empty($post['reserved'])) {
+            BootWiki::setMessage('Invalid submission. Are you a human?');
+            return false;
+        }
+        
         // Check if username is in use
         $account = R::findOne('account', 'username = ?', array($post['username']));
         if (!empty($account)) {
@@ -135,6 +149,10 @@ class Account extends Block {
         }
         
         return true;
+    }
+    
+    public function __toString() {
+        return $this->displayname;
     }
     
 }

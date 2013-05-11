@@ -2,13 +2,17 @@
 
 /**
  * Description of Detail
- * This class acts as a model and a view model for Content Detail
+ * This class acts as a view model for Content Detail
  *
  * @author mafonso
  */
-use RedBean_Facade as R;
-
 class Detail extends Block {
+    
+    /**
+     * This holds the content data
+     * @var Content
+     */
+    public $content;
     
     public function __construct() {
         parent::__construct('content');
@@ -19,22 +23,18 @@ class Detail extends Block {
      * @param string $alias
      * @return boolean
      */
-    public function find($alias) {
+    public function visit($content) {
         
-        // Try to load content
-        $content = R::findOne('content', 'alias = ?', array($alias));
-        if (empty($content)) return false;
-
-        // Update visits
-        $content->visits = $content->visits + 1;
-        R::store($content);
-
-        // load data
-        $this->importBean($content);
+        // Add visit
+        $content->addVisits();
+        $content->save();
         
         // Load versions
-        $this->versions = R::find('contentversion', '1 AND content_id = ?', 
-                array($content->id));
+        $this->versions = $content->loadVersions();
+        
+        // set content
+        $this->content = $content;
+        
         return true;
     }
 }

@@ -16,79 +16,17 @@ class ContentForm extends Block {
      */
     public $idioms = array();
     
+    /**
+     * This holds the content data
+     * @var Content
+     */
+    public $content;
+    
     public function __construct() {
         parent::__construct('content_form');
-    }
-    
-    /**
-     * Loads content to the form based on Content alias unique key
-     * @param string $alias
-     * @return \ContentForm
-     */
-    public function load($alias) {
-        // Try to load content
-        $content = R::findOne('content', 'alias = ?', array($alias));
-        if (empty($content)) {
-            $t = new Content($alias);
-            $t->publish = 0;
-            $t->author = BootWiki::getLoggedAccount()->displayname;
-            $content = $t->exportToBean(R::dispense('content'));
-        }
-        $this->importBean($content);
-        return $this;
-    }
-    
-    /**
-     * Saves form data. This method may be moved to elsewhere
-     * @param array $post
-     * @param array $upload_image
-     */
-    public function save($post, $upload_image) {
         
-        // Import fields (ugly i know)
-        $fields = 'title,alias,publish,featured,date,description,keywords,author,intro,html';
-        // Find record
-        $content = R::findOne('content', 'alias = ?', array($this->alias));
-        if (empty($content)) {
-            $content = R::dispense('content');
-        }
-        else {
-            // Save last version
-            $version = R::dispense('contentversion');
-            $version->import($content->export(), $fields);
-            $version->date = date('Y-m-d H:i:s');
-            $version->content = $content;
-            R::store($version);
-        }
-
-        // Import changes
-        $content->import($post, $fields);
-        $content->idiom = R::findOne('idiom', 'code = ?', array($post['idiom']));
-        $new_image = Image::upload($upload_image);
-        if ($new_image) $content->image = $new_image;
-
-        // Save
-        try {
-            R::store($content);
-        } catch (Exception $e) {
-            BootWiki::setMessage($e->getMessage());
-        }
-    }
-    
-    /**
-     * Loads content to the form based on a Content version
-     * @param int $version_id
-     * @return boolean|\ContentForm
-     */
-    public function loadVersion($version_id) {
-        
-        // Try to load content
-        $version = R::findOne('contentversion', 'id = ?', array($version_id));
-        if (empty($version)) return false;
-            
-        $this->importBean($version);
-        $this->date = reset(explode(' ', $this->date));
-        return $this;
+        // Load idioms
+        $this->loadIdioms();
     }
     
     /**
@@ -101,6 +39,15 @@ class ContentForm extends Block {
             $idiom->importBean($item);
             $this->idioms[] = $idiom;
         }
+    }
+    
+    /**
+     * Load content to be edit
+     * @param Content $content
+     */
+    public function edit($content) {
+        if (is_object($content->author)) $content->author = $content->author->username;
+        $this->content = $content;
     }
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# blog: http://ogp.me/ns/blog#">
   <head>
     <meta charset="utf-8">
     <title><?=$this->title?></title>
@@ -7,6 +7,11 @@
     <meta name="description" content="<?=$this->description?>">
     <meta name="keywords" content="<?=$this->keywords?>">
     <meta name="author" content="<?=$this->author?>">
+    <meta property="og:type" content="article" /> 
+    <meta property="og:site_name" content="<?=$this->title?>" />
+    <meta property="og:title" content="<?=$this->title?>" />
+    <meta property="og:description" content="<?=$this->description?>" />
+    <meta property="article:author" content="<?=$this->author?>" />
     <base href="<?=BASEURL?>/">
 
     <!-- Le styles -->
