@@ -164,7 +164,7 @@
                        src="<?=BASEURL?>/web/data/<?=$content->image->src?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
-                  <p><a href="<?=$content->more_link->href?>" 
+                  <p><a href="<?=BASEURL.'/'.$content->alias?>" 
                         class="btn btn-primary pull-right"><?=$content->more_link?></a></p>
                 </div>
             <? } ?>
@@ -179,7 +179,7 @@
                        src="<?=BASEURL?>/web/data/<?=$content->image->src?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
-                  <a href="<?=$content->more_link->href?>" class="btn btn-mini pull-right"><?=$content->more_link?></a>
+                  <a href="<?=BASEURL.'/'.$content->alias?>" class="btn btn-mini pull-right"><?=$content->more_link?></a>
                 </div><!--/span-->
               <? } ?>
             </div><!--/row-->
