@@ -68,7 +68,7 @@ class Image extends Link {
      */
     public function __toString() {
         if (!$this->rel_path) return $this->src;
-        return BASEURL.DATAURL.'/'.$this->src;
+        return DATAURL.'/'.$this->src;
     }
     
 }
