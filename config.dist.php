@@ -11,7 +11,7 @@ ini_set('session.gc_probability', 0);
  * Paths configuration
  */
 define('APPPATH',       realpath('.'));
-define('BASEURL',       '/bootwiki');
+define('BASEURL',       '/bootwiki'); // IMPORTANT: YOU MAY NEED TO CHANGE THIS
 define('DATAPATH',      APPPATH.'/web/data');
 define('DATAURL',       BASEURL.'/web/data');
 define('TEMPLATEPATH',  APPPATH.'/template');
