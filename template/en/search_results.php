@@ -15,6 +15,8 @@
             </h4>
             <?=$item->intro?>
           </div>
+          <hr />
+          <div class="clearfix"></div>
         </li>
         <? } ?>
     </ul>
