@@ -15,6 +15,7 @@ require_once 'lib/Idiom.php';
 require_once 'lib/Image.php';
 require_once 'lib/Content.php';
 require_once 'lib/Block.php';
+require_once 'lib/Gallery.php';
 require_once 'lib/Account.php';
 require_once 'lib/Results.php';
 require_once 'lib/Detail.php';
@@ -322,6 +323,19 @@ $app->get('/mod/auth/logout', function () use ($app) {
     // Process logout
     BootWiki::logout();
     $app->redirect(BASEURL);
+});
+
+/*
+ * Load image gallery
+ */
+$app->get('/mod/gallery', function () use ($app) {
+    
+    // Create Gallery
+    $gallery = new Gallery();
+    $gallery->load();
+    
+    // Print layout
+    $app->response()->body((string)$gallery);
 });
 
 /*

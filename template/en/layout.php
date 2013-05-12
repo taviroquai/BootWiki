@@ -216,7 +216,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="web/js/wysihtml5-0.3.0_rc2.min.js"></script>
     <script src="web/js/bootstrap.min.js"></script>
-    <script src="web/js/bootstrap-wysihtml5-0.0.2.min.js"></script>
+    <script src="web/js/bootstrap-wysihtml5-0.0.2.js"></script>
 
   </body>
 </html>

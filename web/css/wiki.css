@@ -14,6 +14,30 @@ a:hover {
   text-decoration: none;
 }
 
+.modal { 
+    max-width: 350px !important; 
+    max-height: 350px !important; 
+    padding: 15px; 
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch; 
+}
+
+.bootstrap-wysihtml5-insert-image-gallery {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.bootstrap-wysihtml5-insert-image-gallery .wiki-thumb {
+    width: 100px;
+    height: 100px;
+}
+
+.bootstrap-wysihtml5-insert-image-gallery .wiki-thumb img {
+    padding: 5px;
+    width: 90px;
+    max-height: 90px;
+}
+
 .media-list {
     list-style-type: none;
 }
