@@ -35,7 +35,7 @@ class Content extends Link {
         $this->html = $html;
         $this->date = date('Y-m-d');
         $this->more_link = new Link();
-        $this->image = new Image('logo.png');
+        $this->image = new Image('collab.png');
         $this->idiom = new Idiom();
         $this->intro = '<p>Intro...</p>';
     }

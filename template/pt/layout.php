@@ -15,6 +15,7 @@
     <base href="<?=BASEURL?>/">
 
     <!-- Le styles -->
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="web/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="web/bootstrap-fileupload/bootstrap-fileupload.min.css">
     <link rel="stylesheet" href="web/css/wiki.css">
