@@ -181,8 +181,8 @@ class BootWiki {
 
         $content = new Content('Welcome to Wiki!', 
                 '<p>A Wiki built upon Twitter Bootstrap, RedBeanPHP and Slim Framework</p>');
-        $content->intro = '<p>A very basic but nice Wiki for you organization</p>';
-        $content->description = 'A very basic but nice Wiki for you organization';
+        $content->intro = '<p>A very basic but nice Wiki for your organization</p>';
+        $content->description = 'A very basic but nice Wiki for your organization';
         $content->keywords = 'wiki bootstrap redbeanphp slim nice simple organizarion';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
