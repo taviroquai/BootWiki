@@ -203,14 +203,13 @@
           <? } ?>
         </div><!--/span-->
       </div><!--/row-->
-
-      <hr>
-
-      <footer class="navbar navbar-inner">
-        <p class="pull-right">BootWiki &copy; Marco Afonso 2013</p>
-      </footer>
-
     </div><!--/.fluid-container-->
+    
+    <footer class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+            <div class="pull-right">BootWiki &copy; Marco Afonso 2013</div>
+        </div>
+    </footer>
 
     <!-- Le javascript
     ================================================== -->
