@@ -10,6 +10,11 @@
     font-family: 'Droid Sans', sans-serif;
 }
 
+body > .navbar, body > .container-fluid {
+    max-width: 1586px;
+    margin: 0 auto;
+}
+
 h1, h2, h3, h4, h5, h6, .sidebar-nav a {
     text-shadow: 4px 4px 2px rgba(210, 210, 210, 1) !important;
 } 
