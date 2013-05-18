@@ -15,8 +15,8 @@
     <base href="<?=BASEURL?>/">
 
     <!-- Le styles -->
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="web/css/bootstrap.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="web/css/bootstrap.css">
     <link rel="stylesheet" href="web/bootstrap-fileupload/bootstrap-fileupload.min.css">
     <link rel="stylesheet" href="web/css/wiki.css">
     <style type="text/css">
@@ -38,7 +38,7 @@
       }
     </style>
     
-    <link rel="stylesheet" href="web/css/bootstrap-wysihtml5-0.0.2.css"></link>
+    <link rel="stylesheet" href="web/css/bootstrap-wysihtml5-0.0.2.css">
     <link rel="stylesheet" href="web/css/bootstrap-responsive.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -68,7 +68,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="brand" style="padding: 0" href="<?=BASEURL?>">
-            <span itemprop="logo" itemscope itemtype="schema.org/ImageObject">
+            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
                 <img itemprop="contentURL" src="<?=ORGANIZATION_LOGO?>" alt="<?=$this->organization_name?>" title="<?=$this->organization_name?>" />
             </span>
             <meta itemprop="name" content="<?=$this->organization_name?>">
