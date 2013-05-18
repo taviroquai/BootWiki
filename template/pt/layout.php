@@ -121,13 +121,6 @@
                             <button class="btn" type="submit">Pesquisar</button>
                         </div>
                     </form>
-                    
-                    <!--
-                    <form class="form-search" action="search">
-                        <input type="text" name="q" value="<?=empty($this->query) ? '' : $this->query?>" class="input-medium search-query">
-                        <button type="submit" class="btn">Enviar</button>
-                    </form>
-                    -->
                 </div>
             </div><!--/.well -->
             
@@ -177,7 +170,7 @@
                 <div class="hero-unit">
                   <h1><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h1>
                   <img class="media-object wiki-img-featured-big pull-left" 
-                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" />
+                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" alt="<?=$content->title?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
                   <p><a href="<?=BASEURL.'/'.$content->alias?>" 
@@ -186,13 +179,13 @@
             <? } ?>
             <? if (!empty($this->featured) && count($this->featured) > 3) { ?>
             <div class="row-fluid">
-                <? for ($i = 1; $i < 4; $i++) { 
+                <? for ($i = 1; $i < count($this->featured); $i++) {
                     $content = $this->featured[$i];
                     ?>
                 <div class="span4">
                   <h2><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h2>
                   <img class="media-object wiki-media-object-img pull-left" 
-                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" />
+                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" alt="<?=$content->title?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
                   <a href="<?=BASEURL.'/'.$content->alias?>" class="btn btn-mini pull-right"><?=$content->more_link?></a>

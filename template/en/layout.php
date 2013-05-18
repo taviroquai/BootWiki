@@ -170,7 +170,7 @@
                 <div class="hero-unit">
                   <h1><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h1>
                   <img class="media-object wiki-img-featured-big pull-left" 
-                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" />
+                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" alt="<?=$content->title?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
                   <p><a href="<?=BASEURL.'/'.$content->alias?>" 
@@ -185,7 +185,7 @@
                 <div class="span<?=round(12/(count($this->featured)-1))?>">
                   <h2><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h2>
                   <img class="media-object wiki-media-object-img pull-left" 
-                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" />
+                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" alt="<?=$content->title?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
                   <a href="<?=BASEURL.'/'.$content->alias?>" class="btn btn-mini pull-right"><?=$content->more_link?></a>
