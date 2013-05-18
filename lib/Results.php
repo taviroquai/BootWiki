@@ -39,7 +39,7 @@ class Results extends Block {
                     OR content.intro like (?)
                     OR content.html like (?)
                     )
-            ORDER BY visits DESC LIMIT 5';
+            ORDER BY visits DESC';
         
         // Prepare values and run query
         $q = "%$q%";
