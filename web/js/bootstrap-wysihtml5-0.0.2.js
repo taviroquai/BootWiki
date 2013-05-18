@@ -83,7 +83,7 @@
 		"font-styles": true,
 		"emphasis": true,
 		"lists": true,
-		"html": false,
+		"html": true,
 		"link": true,
 		"image": true,
 		events: {},
@@ -244,7 +244,6 @@
                                             insertImageModal.find('.bootstrap-wysihtml5-insert-image-gallery a')
                                                 .click(function(e) {
                                                     e.preventDefault();
-                                                    console.log(this);
                                                     urlInput.val(jQuery(this).attr('href'));
                                                     return false;
                                                 });
