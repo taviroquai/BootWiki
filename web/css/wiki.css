@@ -16,6 +16,8 @@ h1, h2, h3, h4, h5, h6, .sidebar-nav a {
 
 .hero-unit h1 {
     font-size: 3.5em;
+    line-height: 150%;
+    margin-bottom: 0.5em;
 }
 
 a:hover {
