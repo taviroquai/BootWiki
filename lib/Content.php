@@ -15,13 +15,28 @@ class Content extends Link {
     public $description = 'Description';
     public $keywords = 'keyword';
     public $author = '';
+    
+    /**
+     * Main content image
+     * @var Image
+     */
     public $image = '';
     public $date = '';
     public $intro = '';
     public $featured = 0;
     public $visits = 0;
     public $category;
+    
+    /**
+     * Content idiom
+     * @var Idiom
+     */
     public $idiom;
+    
+    /**
+     *
+     * @var Link
+     */
     public $more_link;
     
     /**

@@ -12,6 +12,10 @@
     <meta property="og:title" content="<?=$this->title?>" />
     <meta property="og:description" content="<?=$this->description?>" />
     <meta property="article:author" content="<?=$this->author?>" />
+    <? if (!empty($this->main_image)) { ?>
+    <meta property="og:image" content="<?=$this->main_image?>" />
+    <link href="<?=$this->main_image?>" rel="image_src">
+    <? } ?>
     <base href="<?=BASEURL?>/">
 
     <!-- Le styles -->

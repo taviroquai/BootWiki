@@ -50,6 +50,16 @@ $app->get('/', function () use ($app) {
     $layout->loadPopular();
     $layout->loadFeatured();
     
+    // Add SEO
+    if (!empty($layout->featured)) {
+        $content = reset($layout->featured);
+        $layout->title = $content->title;
+        $layout->description = $content->description;
+        $layout->keywords = implode(',', explode(' ', $content->keywords));
+        $layout->author = $content->author;
+        $layout->main_image = DATAURL.'/'.$content->image->src;
+    }
+    
     // Output layout
     $app->response()->body((string)$layout);
 });
@@ -115,6 +125,7 @@ $app->get('/:alias', function ($alias) use ($app) {
     $layout->description = $main->content->description;
     $layout->keywords = implode(',', explode(' ', $main->content->keywords));
     $layout->author = $main->content->author;
+    $layout->main_image = DATAURL.'/'.$main->content->image->src;
     
     // Print layout
     $app->response()->body((string)$layout);
