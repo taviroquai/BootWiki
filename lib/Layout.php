@@ -102,7 +102,7 @@ class Layout extends Block {
         $sql = 'SELECT content.* FROM content 
             LEFT JOIN idiom ON content.idiom_id = idiom.id
             WHERE idiom.code = ? AND content.publish = 1
-            ORDER BY visits DESC LIMIT 5';
+            ORDER BY visits DESC';
         $rows = R::getAll($sql, array(BootWiki::getIdiom()));
         $beans = R::convertToBeans('content', $rows);
         $items = array();
