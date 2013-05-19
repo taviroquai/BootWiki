@@ -351,8 +351,9 @@ $app->get('/mod/download/:ref', function ($ref) use ($app) {
     if (empty($real)) {
         $app->redirect(BASEURL.'/mod/404');
     }
-    if (substr($real, 0, count(DATAPATH)) != DATAPATH) {
-        $app->redirect(BASEURL);
+    $datapath = substr($real, 0, strlen(DATAPATH));
+    if ($datapath != DATAPATH) {
+        $app->redirect(BASEURL.'/mod/404');
     }
     
     // Create file download block
