@@ -22,28 +22,9 @@
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="web/css/bootstrap.css">
     <link rel="stylesheet" href="web/bootstrap-fileupload/bootstrap-fileupload.min.css">
-    <link rel="stylesheet" href="web/css/wiki.css">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
-    </style>
-    
     <link rel="stylesheet" href="web/css/bootstrap-wysihtml5-0.0.2.css">
     <link rel="stylesheet" href="web/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="web/css/wiki.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -173,9 +154,13 @@
                 <? $content = reset($this->featured); ?>
                 <div class="hero-unit">
                   <h1><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h1>
-                  <img class="media-object wiki-img-featured-big pull-left" 
-                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" alt="<?=$content->title?>" />
-                  <div><?=$content->intro?></div>
+                  <div class="row">
+                      <div class="span8">
+                        <img class="media-object wiki-img-featured-big" 
+                            src="<?=$content->image->getUrl()?>" alt="<?=$content->title?>" />
+                      </div>
+                      <div class="span4"><?=$content->intro?></div>
+                  </div>
                   <div class="clearfix"></div>
                   <p><a href="<?=BASEURL.'/'.$content->alias?>" 
                         class="btn btn-primary pull-right"><?=$content->more_link?></a></p>
@@ -189,7 +174,7 @@
                 <div class="span4">
                   <h2><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h2>
                   <img class="media-object wiki-media-object-img pull-left" 
-                       src="<?=BASEURL?>/web/data/<?=$content->image->src?>" alt="<?=$content->title?>" />
+                       src="<?=$content->image->getThumbUrl()?>" alt="<?=$content->title?>" />
                   <div><?=$content->intro?></div>
                   <div class="clearfix"></div>
                   <a href="<?=BASEURL.'/'.$content->alias?>" class="btn btn-mini pull-right"><?=$content->more_link?></a>

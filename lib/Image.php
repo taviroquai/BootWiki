@@ -57,9 +57,87 @@ class Image extends Link {
         if ($file['error']) return false;
         $destination = DATAPATH.'/'.$file['name'];
         if (move_uploaded_file($file['tmp_name'], $destination)) {
+            self::createThumb($destination);
+            self::createThumb($destination, 280);
             return $file['name'];
         }
         return false;
+    }
+    
+    static function createThumb($filename, $thumbSize = 60) {
+
+        // Get image information
+        list($width, $height, $type) = getimagesize($filename);
+        
+        // Choose image type
+        switch ($type) {
+            case 1: $imgcreatefrom = "ImageCreateFromGIF"; break;
+            case 3: $imgcreatefrom = "ImageCreateFromPNG"; break;
+            default: $imgcreatefrom = "ImageCreateFromJPEG";
+        }
+
+        // Load image
+        $myImage = $imgcreatefrom($filename) or die("Error: Cannot find image!"); 
+
+        // Find purpotion
+        if ($width > $height) {
+            $biggestSide = $width;
+            $cropPercent = $width > 560 ? 0.5 : $height / $width;
+        }
+        else {
+            $biggestSide = $height; 
+            $cropPercent = $height > 560 ? 0.5 : $width / $height;
+        }
+        $cropWidth   = $biggestSide*$cropPercent; 
+        $cropHeight  = $biggestSide*$cropPercent; 
+
+        // Getting the top left coordinate
+        $x = ($width-$cropWidth)/2;
+        $y = ($height-$cropHeight)/2;
+        
+        // Create new image
+        $thumb = imagecreatetruecolor($thumbSize, $thumbSize);
+        
+        // replace alpha with color
+        $white = imagecolorallocate($thumb,  255, 255, 255);
+        imagefilledrectangle($thumb, 0, 0, $thumbSize, $thumbSize, $white);
+
+        // Copy into new image
+        imagecopyresampled($thumb, $myImage, 0, 0, $x, $y, $thumbSize, $thumbSize, $cropWidth, $cropHeight); 
+
+        // generate thumb name and save image
+        imagejpeg($thumb, self::generateThumbPath(basename($filename), $thumbSize), 90);
+    }
+    
+    /**
+     * Generate and save thumb image
+     * @param string $filename
+     * @param int $size
+     * @param string $ext
+     * @return string
+     */
+    static function generateThumbPath($filename, $size = 60, $ext = 'jpg') {
+        $filename = str_replace(array('png', 'jpeg'), 'jpg', $filename);
+        return DATAPATH.'/thumb_'.$size.'_'.$filename;
+    }
+    
+    /**
+     * Return image URL
+     * @return string
+     */
+    public function getUrl() {
+        return DATAURL.'/'.$this->src;
+    }
+    
+    /**
+     * Return thumb url
+     * @param int $size
+     * @return string
+     */
+    public function getThumbUrl($size = 60) {
+        $filename = str_replace(array('png', 'jpeg'), 'jpg', $this->src);
+        if (!file_exists(DATAPATH.'/thumb_'.$size.'_'.$filename)) return $this->getUrl();
+        return DATAURL.'/thumb_'.$size.'_'.$filename;
     }
     
     /**

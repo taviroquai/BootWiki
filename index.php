@@ -52,12 +52,14 @@ $app->get('/', function () use ($app) {
     
     // Add SEO
     if (!empty($layout->featured)) {
+        
+        /* @var $content Content Featured content */
         $content = reset($layout->featured);
         $layout->title = $content->title;
         $layout->description = $content->description;
-        $layout->keywords = implode(',', explode(' ', $content->keywords));
+        $layout->keywords = $content->getKeywords();
         $layout->author = $content->author;
-        $layout->main_image = DATAURL.'/'.$content->image->src;
+        $layout->main_image = $content->image->getUrl();
     }
     
     // Output layout
@@ -121,11 +123,11 @@ $app->get('/:alias', function ($alias) use ($app) {
     $layout->loadPopular();
     
     // Add SEO
-    $layout->title = $main->content->title;
-    $layout->description = $main->content->description;
-    $layout->keywords = implode(',', explode(' ', $main->content->keywords));
-    $layout->author = $main->content->author;
-    $layout->main_image = DATAURL.'/'.$main->content->image->src;
+    $layout->title = $content->title;
+    $layout->description = $content->description;
+    $layout->keywords = $content->getKeywords();
+    $layout->author = $content->author;
+    $layout->main_image = $content->image->getUrl();
     
     // Print layout
     $app->response()->body((string)$layout);

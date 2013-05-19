@@ -226,6 +226,15 @@ class Content extends Link {
     }
     
     /**
+     * Return costumized keywords using a splitter
+     * @param string $splitter
+     * @return string
+     */
+    public function getKeywords($splitter = ',') {
+        return implode($splitter, explode(' ', $this->keywords));
+    }
+    
+    /**
      * Magic method to convert to string
      * @return string
      */
