@@ -339,6 +339,36 @@ $app->get('/mod/gallery', function () use ($app) {
 });
 
 /*
+ * File downloader
+ */
+$app->get('/mod/download/:ref', function ($ref) use ($app) {
+    
+    // Transform reference to path
+    $filename = str_replace('-', '/', $ref);
+    
+    // Validate file path; should be in DATAPATH directory
+    $real = realpath(DATAPATH.'/'.$filename);
+    if (empty($real)) {
+        $app->redirect(BASEURL.'/mod/404');
+    }
+    if (substr($real, 0, count(DATAPATH)) != DATAPATH) {
+        $app->redirect(BASEURL);
+    }
+    
+    // Create file download block
+    $main = new Block('download');
+    $main->href = DATAURL.'/'.$filename;
+    
+    // Load layout
+    $layout = new Layout($main);
+    $layout->loadRecent();
+    $layout->loadPopular();
+    
+    // Print layout
+    $app->response()->body((string)$layout);
+});
+
+/*
  * Finally, run application
  */
 $app->run();
