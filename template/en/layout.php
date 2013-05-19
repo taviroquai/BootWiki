@@ -143,7 +143,7 @@
                     <li class="nav-header">Most popular...</li>
                     <? foreach ($this->popular as $item) { ?>
                       <li<? if (!empty($item->class)) {?> class="<?=$item->class?>"<? } ?>>
-                          <a href="<?=$item->href?>"><?=$item?> <span class="badge badge-info wiki-visits-min"><?=$item->visits?></span></a>
+                          <a href="<?=$item->href?>"><?=$item?> <span class="badge badge-info wiki-visits-min"><?=(int)$item->visits?></span></a>
                       </li>
                     <? } ?>
                   </ul>
