@@ -179,11 +179,11 @@ class BootWiki {
         $idiom_en->flag_image = 'web/img/flags/United_Kingdom.png';
         R::store ($idiom_en);
 
-        $content = new Content('Welcome to Wiki!', 
-                '<p>A Wiki built upon Twitter Bootstrap, RedBeanPHP and Slim Framework</p>');
-        $content->intro = '<p>A very basic but nice Wiki for your organization</p>';
-        $content->description = 'A very basic but nice Wiki for your organization';
-        $content->keywords = 'wiki bootstrap redbeanphp slim nice simple organizarion';
+        $content = new Content('Welcome to BootWiki!', 
+                '<p>A php Wiki with Twitter Bootstrap, RedBeanPHP and Slim Framework</p>');
+        $content->intro = '<p>A php Wiki with Twitter Bootstrap for your organization</p>';
+        $content->description = 'A php Wiki with Twitter Bootstrap for your organization';
+        $content->keywords = 'php wiki twitter bootstrap redbeanphp slim nice simple organizarion';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
         $content->author = $account->username;
