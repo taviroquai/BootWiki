@@ -102,8 +102,8 @@
 <script type="text/javascript" src ="web/js/wysihtml5-override.js"></script>
 <script type="text/javascript">
     jQuery(function($) {
-        $('#wysiwyg1').wysihtml5(overrideRules);
-        $('#wysiwyg2').wysihtml5(overrideRules);
+        $('#wysiwyg1').wysihtml5(overrideOptions);
+        $('#wysiwyg2').wysihtml5(overrideOptions);
         $('.fileupload').fileupload();
     });
 </script>
