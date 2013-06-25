@@ -30,7 +30,9 @@ class Detail extends Block {
         $content->save();
         
         // Load versions
-        $this->versions = $content->loadVersions();
+        if (BootWiki::getLoggedAccount() !== null) {
+            $this->versions = $content->loadVersions();
+        }
         
         // set content
         $this->content = $content;
