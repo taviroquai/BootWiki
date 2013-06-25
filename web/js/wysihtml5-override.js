@@ -16,6 +16,14 @@ var overrideOptions = {
             "li": {},
             "h1": {},
             "h2": {},
+            "code": {},
+            "strong": {},
+            "em": {},
+            "p": {
+                "add_class": {
+                    "align": "align_text"
+                }
+            },
             "u": 1,
             "img":  {
                 "check_attributes": {
