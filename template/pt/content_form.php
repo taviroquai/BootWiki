@@ -99,10 +99,11 @@
     </div>
 </form>
 <script type="text/javascript" src ="web/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+<script type="text/javascript" src ="web/js/wysihtml5-override.js"></script>
 <script type="text/javascript">
     jQuery(function($) {
-        $('#wysiwyg1').wysihtml5();
-        $('#wysiwyg2').wysihtml5();
+        $('#wysiwyg1').wysihtml5(overrideRules);
+        $('#wysiwyg2').wysihtml5(overrideRules);
         $('.fileupload').fileupload();
     });
 </script>
