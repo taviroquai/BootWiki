@@ -772,7 +772,7 @@ input[type="color"],
   margin-bottom: 9px;
   font-size: 14px;
   line-height: 20px;
-  color: #e5a02c;
+  color: inherit;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
