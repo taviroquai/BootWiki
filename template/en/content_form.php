@@ -51,6 +51,8 @@
 
             <label>Date</label>
             <input name="content[date]" type="text" value="<?=$this->content->date?>" />
+            <label>Visits</label>
+            <input name="content[visits]" type="text" value="<?=$this->content->visits?>" />
             <label>Description</label>
             <textarea name="content[description]" class="span12"><?=$this->content->description?></textarea>
             <label>Keywords</label>

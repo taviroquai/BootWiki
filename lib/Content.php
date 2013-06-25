@@ -138,7 +138,7 @@ class Content extends Link {
     public function savePost($post, $upload_image) {
         
         // Import fields (ugly i know)
-        $fields = 'title,alias,publish,featured,date,description,keywords,author,intro,html';
+        $fields = 'title,alias,publish,featured,date,description,keywords,author,intro,html,visits';
         // Find record
         $bean = R::findOne('content', 'alias = ?', array($this->alias));
         if (empty($bean)) {
