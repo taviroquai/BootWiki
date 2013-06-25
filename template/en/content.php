@@ -18,7 +18,7 @@
     </p>
     <span itemprop="primaryImageOfPage" itemscope itemtype="ImageObject" 
          id="content_image" class="pull-right" style="text-align: center;">
-                <?=!empty($this->content->image) ? $this->content->image->html() : ''?></span>
+                <?=!empty($this->content->image) ? $this->content->image->html($this->content->title) : ''?></span>
     <div itemprop="description" id="content_intro"><?=$this->content->intro?></div>
     <div itemprop="text" id="content_body"><?=$this->content->html?></div>
     <div class="clearfix"></div>

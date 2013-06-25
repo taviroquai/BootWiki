@@ -43,9 +43,11 @@ class Image extends Link {
      * Helper to convert this image to an HTML img tag
      * @return type
      */
-    public function html() {
+    public function html($alt = '', $title = '') {
+        $alt = !empty($alt) ? $alt : $this->alt;
+        $title = !empty($title) ? $title : empty($this->title) ? $alt : $this->title;
         $src = (string) $this;
-        return "<img itemprop=\"contentURL\" src=\"$src\" title=\"$this->title\" alt=\"$this->alt\" />";
+        return "<img itemprop=\"contentURL\" src=\"$src\" title=\"$title\" alt=\"$alt\" />";
     }
     
     /**
