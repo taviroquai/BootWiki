@@ -95,6 +95,11 @@ a:hover {
     color: red !important;
 }
 
+#content_image img {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 40px;
@@ -110,5 +115,36 @@ body {
         float: none;
         padding-left: 5px;
         padding-right: 5px;
+    }
+}
+
+@media (max-width: 800px) {
+    /* Remove top and bottom margins */
+    body {
+        padding: 0;
+    }
+    
+    /* Give a little margins */
+    .container-fluid {
+        padding: 5px;
+    }
+    
+    h2 {
+        font-size: 120%;
+    }
+}
+
+@media (max-width: 480px) {
+    
+    /* Fix aero-unit */
+    .hero-unit {
+        padding: 5px 5px 20px 5px;
+        text-align: center;
+    }
+    
+    /* Enable use of floated navbar text */
+    #content_image img {
+        margin-left: 0;
+        width: 100%;
     }
 }
