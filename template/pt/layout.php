@@ -101,9 +101,9 @@
                     <div class="nav-header">Pesquisar...</div>
                     <form class="form-search" action="search">
                         <div class="input-append">
-                            <input class="span9" type="text" name="q"
+                            <input class="span7" type="text" name="q"
                                    value="<?=empty($this->query) ? '' : $this->query?>">
-                            <button class="btn" type="submit">Pesquisar</button>
+                            <button class="btn" type="submit"><i class="icon-search"></i></button>
                         </div>
                     </form>
                 </div>
