@@ -72,6 +72,30 @@ class Account extends Link {
     }
     
     /**
+     * Changes account
+     * @param array $post
+     * @return boolean
+     */
+    public function update($post) {
+        
+        // Validate update before continue
+        $result = $this->validateUpdate($post);
+        if (!$result) return false;
+        
+        // Load account
+        $username = BootWiki::getLoggedAccount()->username;
+        $account = R::findOne('account', 'username = ?', array($username));
+        $account->displayname = $post['displayname'];
+        $account->profile = $post['profile'];
+        R::store($account);
+        $this->importBean($account);
+        
+        // Return success
+        BootWiki::setMessage('Account has changed!');
+        return true;
+    }
+    
+    /**
      * Changes account password
      * @param array $post
      * @return boolean
@@ -123,6 +147,21 @@ class Account extends Link {
             return false;
         }
         if (!$this->validatePassword($post)) return false;
+        return true;
+    }
+    
+    /**
+     * Validates data (or post) to update an account
+     * @param array $post
+     * @return boolean
+     */
+    public function validateUpdate($post) {
+        
+        // Check if display name is empty
+        if (strlen($post['displayname']) < 3) {
+            BootWiki::setMessage('Invalid display name');
+            return false;
+        }
         return true;
     }
     

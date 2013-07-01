@@ -300,7 +300,8 @@ $app->get('/mod/myaccount', function () use ($app) {
     if (BootWiki::getLoggedAccount() == null) $app->redirect(BASEURL);
     
     // Load authentication form
-    $main = new Block('changepw_form');
+    $main = new Block('account_form');
+    $main->account = BootWiki::getLoggedAccount();
     
     // Load layout
     $layout = new Layout($main);
@@ -319,9 +320,17 @@ $app->post('/mod/myaccount', function () use ($app) {
     // redirect if not logged
     if (BootWiki::getLoggedAccount() == null) $app->redirect(BASEURL);
     
-    // Process login
-    $main = new Account();
-    $main->changePassword($app->request()->post());
+    // Process change account
+    if ($app->request()->post('displayname')) {
+        $account = BootWiki::getLoggedAccount();
+        $account->update($app->request()->post());
+    }
+    
+    // Process change password
+    if ($app->request()->post('password_confirm')) {
+        $main = new Account();
+        $main->changePassword($app->request()->post());
+    }
     
     // Apply redirects
     $app->redirect(BASEURL.'/mod/myaccount');
