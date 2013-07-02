@@ -8,7 +8,13 @@
     
     <p id="content_meta">
         <em itemprop="lastReviewed" class="label"><?=$this->content->date?></em> 
-        <span class="label label-important"> by <?=$this->content->author?></span>
+        <? if (is_object($this->content->author) && !empty($this->content->author->profile)) : ?>
+            <a rel="author" href="<?=$this->content->author->profile?>" title="<?=$this->content->author?>">
+                <span class="label label-important"> por <?=$this->content->author?></span>
+            </a>
+        <? else: ?>
+            <span class="label label-important"> por <?=$this->content->author?></span>
+        <? endif; ?>
         <span class="badge badge-info"><?=$this->content->visits?> visitas</span>
         <meta itemprop="interactionCount" content="<?=$this->content->visits?> UserPageVisits">
         <meta itemprop="author" content="<?=$this->content->author?>" 
