@@ -162,8 +162,15 @@
                       <div class="span4"><?=$content->intro?></div>
                   </div>
                   <div class="clearfix"></div>
-                  <p><a href="<?=BASEURL.'/'.$content->alias?>" 
-                        class="btn btn-primary pull-right"><?=$content->more_link?></a></p>
+                  <p>
+                      <a href="<?=BASEURL.'/'.$content->alias?>" 
+                        class="btn btn-primary pull-right"><?=$content->more_link?></a>
+                        <? if (is_object($content->author) && !empty($content->author->profile)) : ?>
+                            <a class ="pull-right"rel="author" href="<?=$content->author->profile?>" title="<?=$content->author?>">por <?=$content->author?>&nbsp;</a>
+                        <? else: ?>
+                            <span>por <?=$content->author?>&nbsp;</span>
+                        <? endif; ?>
+                  </p>
                 </div>
             <? } ?>
             <? if (!empty($this->featured) && count($this->featured) > 3) { ?>
