@@ -168,7 +168,7 @@
                         <? if (is_object($content->author) && !empty($content->author->profile)) : ?>
                             <a class ="pull-right"rel="author" href="<?=$content->author->profile?>" title="<?=$content->author?>">por <?=$content->author?>&nbsp;</a>
                         <? else: ?>
-                            <span>por <?=$content->author?>&nbsp;</span>
+                            <span class="pull-right">por <?=$content->author?>&nbsp;</span>
                         <? endif; ?>
                   </p>
                 </div>
