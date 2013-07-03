@@ -5,14 +5,19 @@
     <title><?=$this->title?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:description" name="description" content="<?=$this->description?>">
+    <meta name="twitter:description" content="<?=$this->description?>">
     <meta name="keywords" content="<?=$this->keywords?>">
+    <? if (is_object($this->author)) : ?>
+    <meta property="article:author" name="author" content="<?=$this->author->username?>">
+    <? else: ?>
     <meta property="article:author" name="author" content="<?=$this->author?>">
+    <? endif; ?>
     <meta name="twitter:creator" content="<?=$this->author?>">
     <meta name="twitter:card" content="summary">
     <meta property="og:type" content="article" /> 
     <meta property="og:title" name="twitter:title" content="<?=$this->title?>" />
     <? if (!empty($this->main_image)) { ?>
-    <meta property="og:image" name="twitter:image" content="<?=$this->main_image?>" />
+    <meta property="og:image" name="twitter:image" content="<?=implode('', BootWiki::parseRoute())?><?=$this->main_image?>" />
     <link href="<?=$this->main_image?>" rel="image_src">
     <? } ?>
     <base href="<?=BASEURL?>/">

@@ -423,6 +423,20 @@ class BootWiki {
         return self::$pw_description[$score];
     }
     
+    /**
+     * Gets an array of URL parts
+     * Hint: use implode to glue all items
+     * @return array
+     */
+    public static function parseRoute($only_domain = true) {
+        $url = array();
+        $url[] = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 4)) == 'https' ? 'https' : 'http';
+        $url[] = '://';
+        $url[] = $_SERVER['SERVER_NAME'];
+        if (!$only_domain) $url[] = $_SERVER['REQUEST_URI'];
+        return $url;
+    }
+    
 }
 
 ?>
