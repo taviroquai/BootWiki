@@ -4,16 +4,14 @@
     <meta charset="utf-8">
     <title><?=$this->title?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?=$this->description?>">
+    <meta property="og:description" name="description" content="<?=$this->description?>">
     <meta name="keywords" content="<?=$this->keywords?>">
-    <meta name="author" content="<?=$this->author?>">
-    <meta property="og:type" content="article" /> 
-    <meta property="og:site_name" content="<?=$this->title?>" />
-    <meta property="og:title" content="<?=$this->title?>" />
-    <meta property="og:description" content="<?=$this->description?>" />
-    <meta property="article:author" content="<?=$this->author?>" />
+    <meta property="article:author" name="author" content="<?=$this->author?>">
+    <meta property="og:type" name="og:type" content="article" /> 
+    <meta property="og:site_name" name="og:site_name" content="<?=$this->title?>" />
+    <meta property="og:title" name="og:title" content="<?=$this->title?>" />
     <? if (!empty($this->main_image)) { ?>
-    <meta property="og:image" content="<?=$this->main_image?>" />
+    <meta property="og:image" name="og:image" content="<?=$this->main_image?>" />
     <link href="<?=$this->main_image?>" rel="image_src">
     <? } ?>
     <base href="<?=BASEURL?>/">
@@ -166,7 +164,7 @@
                       <a href="<?=BASEURL.'/'.$content->alias?>" 
                         class="btn btn-primary pull-right"><?=$content->more_link?></a>
                         <? if (is_object($content->author) && !empty($content->author->profile)) : ?>
-                            <a class ="pull-right"rel="author" href="<?=$content->author->profile?>" title="<?=$content->author?>">by <?=$content->author?>&nbsp;</a>
+                            <a class="pull-right" rel="author" href="<?=$content->author->profile?>" title="<?=$content->author?>">by <?=$content->author?>&nbsp;</a>
                         <? else: ?>
                             <span class="pull-right"> by <?=$content->author?>&nbsp;</span>
                         <? endif; ?>
