@@ -28,6 +28,18 @@
     <div itemprop="description" id="content_intro"><?=$this->content->intro?></div>
     <div itemprop="text" id="content_body"><?=$this->content->html?></div>
     <div class="clearfix"></div>
+    <div class="pull-right">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        </div>
+        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51d4bb04702edcc6"></script>
+        <!-- AddThis Button END -->
+    </div>
+    <div class="clearfix"></div>
     <p class="well" itemprop="keywords"><?=$this->content->keywordsToLabels()?></p>
 </div>
 
