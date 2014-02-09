@@ -9,19 +9,8 @@ Dependencies: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git
 
 How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:
 
-1. sudo su
-2. mkdir /var/www/bootwiki
-3. cd /var/www/bootwiki
-4. git clone https://github.com/taviroquai/BootWiki.git .
-5. ./install_bootwiki.sh
+Download zip file from https://github.com/taviroquai/BootWiki and extract to a folder as /var/www/bootwiki
 
-Open config.php and change to your configuration, including MAIL configuration
-
-Open http://localhost/bootwiki/install
-
-Done!
-
-Open http://localhost/bootwiki/
-Login with "admin" user and "admin" password
+Open in browser http://localhost/bootwiki and follow installer instructions
 
 Comments and help are appreciated.

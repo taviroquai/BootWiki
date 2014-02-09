@@ -1,9 +1,25 @@
 <?php
 
+/**
+ * Force to display errors
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 set_time_limit(0);
 
+/**
+ * Include required classes
+ */
+require_once 'lib/Requirement.php';
+require_once 'lib/Requirement/DependenciesExists.php';
+require_once 'lib/Requirement/MinPhpVersion.php';
+require_once 'lib/Requirement/FolderWriteable.php';
+require_once 'lib/Requirement/DatabaseDriversExists.php';
+require_once 'lib/Requirement/DatabaseConnection.php';
+
+/**
+ * Setup configuration defaults
+ */
 $defaults = array(
     'step1' => array(
         'apppath' => realpath('.'),
@@ -47,18 +63,24 @@ $defaults = array(
     )
 );
 
+/**
+ * Setup instalation steps
+ */
 $steps = array(
     array('label' => 'Application Paths and URLs', 'url' => 'installer.php?step=1'),
     array('label' => 'Database Configuration', 'url' => 'installer.php?step=2'),
     array('label' => 'SEO and Micro Data', 'url' => 'installer.php?step=3'),
     array('label' => 'Mail Configuration', 'url' => 'installer.php?step=4'),
     array('label' => 'Check configuration', 'url' => 'installer.php?step=5'),
-    array('label' => 'Save configuration', 'url' => 'installer.php?step=6'),
-    array('label' => 'Install database', 'url' => 'installer.php?step=7'),
-    array('label' => 'Finish', 'url' => 'installer.php?step=8'),
+    array('label' => 'Install database', 'url' => 'installer.php?step=6'),
+    array('label' => 'Finish', 'url' => 'installer.php?step=7'),
 );
 
+/**
+ * Use session to store user configuration
+ */
 session_start();
+define('BASEURL', dirname($_SERVER['REQUEST_URI']));
 
 /**
  * Init defaults
@@ -78,42 +100,44 @@ if (!empty($_GET['step']) && $_GET['step'] > 0 && $_GET['step'] <= count($steps)
     $_SESSION['step'] = $_GET['step'];
 }
 
-define('BASEURL', dirname($_SERVER['REQUEST_URI']));
-
-require_once 'lib/Requirement.php';
-require_once 'lib/Requirement/DependenciesExists.php';
-require_once 'lib/Requirement/MinPhpVersion.php';
-require_once 'lib/Requirement/FolderWriteable.php';
-require_once 'lib/Requirement/DatabaseDriversExists.php';
-require_once 'lib/Requirement/DatabaseConnection.php';
-    
+/**
+ * Check for application requirements
+ */
 $requirements = array(
     new MinPHPVersion(),
     new DependenciesExists(),
     new FolderWriteable($_SESSION['step1']['datapath']),
     new FolderWriteable('config.php', 'touch config.php & sudo chmod 777 config.php'),
-    new DatabaseDriversExists(),
-    new DatabaseConnection($_SESSION['step2'])
+    new DatabaseDriversExists()
 );
 if ($_SESSION['step2']['dbdriver'] == 'sqlite') {
     $requirements[] = new FolderWriteable(dirname($_SESSION['step2']['dbfile']));
 }
+
+$requirements[] = new DatabaseConnection($_SESSION['step2']);
+
 if (!empty($_SESSION['step4']['email_debug_filepath'])) {
     $tmp = $_SESSION['step4']['email_debug_filepath'];
-    $requirements[] = new FolderWriteable($tmp, 'touch '.$tmp.' & sudo chmod 777 config.php');
+    $requirements[] = new FolderWriteable($tmp, 'touch '.$tmp.' & sudo chmod 777 '.$tmp);
     unset($tmp);
 }
 
-$step5 = true;
+$_SESSION['step5_ok'] = true;
+if (!isset($_SESSION['step6_ok'])) $_SESSION['step6_ok'] = false;
 foreach ($requirements as $item) {
     $item->result = $item->test();
-    $step5 = $step5 & $item->result;
+    $_SESSION['step5_ok'] = $_SESSION['step5_ok'] & $item->result;
 }
 
-if (!$step5 && $_SESSION['step'] > 5) $_SESSION['step'] = 5;
+/**
+ * Do not let to go further than step 5 if requirements are not met
+ */
+if (!$_SESSION['step5_ok'] && $_SESSION['step'] > 5) $_SESSION['step'] = 5;
 
-if ($_SESSION['step'] == 6 && $step5) {
-    
+/**
+ * Requirements are ok, save configuration now
+ */
+if ($_SESSION['step5_ok']) {
     $step6_results = array();
     
     $config_content = file_get_contents('config.tpl');
@@ -135,7 +159,7 @@ if ($_SESSION['step'] == 6 && $step5) {
     } else {
         $step6_results[] = 'config.php file could not be updated';
     }
-    $count = glob('web/data.dist/*');
+    $count = glob(rtrim($_SESSION['step1']['datapath'], '/').'/*');
     if (empty($count)) {
         exec('cp -R web/data.dist/* '.$_SESSION['step1']['datapath'], $output3);
         $step6_results[] = 'Copy default data to '.$_SESSION['step1']['datapath'];
@@ -144,12 +168,14 @@ if ($_SESSION['step'] == 6 && $step5) {
         exec('touch '.$_SESSION['step2']['dbfile']);
         $step6_results[] = 'Create database file: '.$_SESSION['step2']['dbfile'];
     }
-    $step6 = true;
 }
 
-if ($_SESSION['step'] == 7 && $step5) {
+/**
+ * STEP 6 - Create database with demo data
+ */
+if ($_SESSION['step'] == 6 && $_SESSION['step5_ok']) {
     
-    $step7_results = array();
+    $step6_results = array();
     try {
         require_once 'vendor/autoload.php';
         require_once 'lib/Link.php';
@@ -167,12 +193,17 @@ if ($_SESSION['step'] == 7 && $step5) {
         
         define('ENCRYPT_SALT', $_SESSION['step4']['encrypt_salt']);
         BootWiki::install();
-        $step7_results[] = 'Database instalation was completed';
-        $step7 = true;
+        $step6_results[] = 'Database instalation was completed';
+        $_SESSION['step6_ok'] = true;
     } catch (\PDOException $e) {
-        $step7_results[] = 'Database error: '.$e->getMessage();
+        $step6_results[] = 'Database error: '.$e->getMessage();
     }
 }
+
+/**
+ * Do not let to go further than step 6 if database is not installed
+ */
+if (!$_SESSION['step6_ok'] && $_SESSION['step'] > 6) $_SESSION['step'] = 5;
 
 ?>
 <!DOCTYPE html>
@@ -270,7 +301,7 @@ if ($_SESSION['step'] == 7 && $step5) {
               <div class="span12">
                   
                   <?php if ($_SESSION['step'] == 1) { ?>
-                  <h2>Step 1 of 8</h2>
+                  <h2>Step 1 of 7</h2>
                   <form method="post">
                       <fieldset>
                           <legend>Application Paths and URLs</legend>
@@ -305,7 +336,7 @@ if ($_SESSION['step'] == 7 && $step5) {
                   <?php } ?>
                   
                   <?php if ($_SESSION['step'] == 2) { ?>
-                  <h2>Step 2 of 8</h2>
+                  <h2>Step 2 of 7</h2>
                   <form method="post">
                       <fieldset>
                           <legend>Database Configuration</legend>
@@ -351,7 +382,7 @@ if ($_SESSION['step'] == 7 && $step5) {
                   <?php } ?>
 
                   <?php if ($_SESSION['step'] == 3) { ?>
-                  <h2>Step 3 of 8</h2>
+                  <h2>Step 3 of 7</h2>
                   <form method="post">
                       <fieldset>
                           <legend>SEO and Microdata</legend>
@@ -401,7 +432,7 @@ if ($_SESSION['step'] == 7 && $step5) {
                   <?php } ?>
                   
                   <?php if ($_SESSION['step'] == 4) { ?>
-                  <h2>Step 4 of 8</h2>
+                  <h2>Step 4 of 7</h2>
                   <form method="post">
                       <fieldset>
                           <legend>Mail Configuration</legend>
@@ -505,7 +536,7 @@ if ($_SESSION['step'] == 7 && $step5) {
                   <?php } ?>
                   
                   <?php if ($_SESSION['step'] == 5) { ?>
-                  <h2>Step 5 of 8</h2>
+                  <h2>Step 5 of 7</h2>
                   <table class="table">
                       <thead>
                           <tr>
@@ -526,33 +557,28 @@ if ($_SESSION['step'] == 7 && $step5) {
                   </table>
                   
                   <hr />
-                  <?php if ($step5) { ?>
-                    <a href="installer.php?step=6" class="btn btn-primary">Next...</a>
-                  <?php } else { ?>
-                    <a href="installer.php?step=5" class="btn btn-primary">Re-check</a>
-                  <?php } ?>
-                  <?php } ?>
-                  
-                  <?php if ($_SESSION['step'] == 6) { ?>
-                        <h2>Step 6 of 8</h2>
+                  <?php if ($_SESSION['step5_ok']) { ?>
                         <h3>Save Configuration</h3>
+                        <?php foreach ($step6_results as $line) {
+                            echo '<br />'.$line;
+                        } ?>
+                        <a href="installer.php?step=6" class="btn btn-primary">Next...</a>
+                  <?php } else { ?>
+                        <a href="installer.php?step=5" class="btn btn-primary">Re-check</a>
+                  <?php } ?>
+                  <?php } ?>
+                 
+                  <?php if ($_SESSION['step'] == 6) { ?>
+                        <h2>Step 6 of 7</h2>
+                        <h3>Install Database</h3>
                         <?php foreach ($step6_results as $line) {
                             echo '<br />'.$line;
                         } ?>
                         <a href="installer.php?step=7" class="btn btn-primary">Next...</a>
                   <?php } ?>
-                 
-                  <?php if ($_SESSION['step'] == 7) { ?>
-                        <h2>Step 7 of 8</h2>
-                        <h3>Install Database</h3>
-                        <?php foreach ($step7_results as $line) {
-                            echo '<br />'.$line;
-                        } ?>
-                        <a href="installer.php?step=8" class="btn btn-primary">Next...</a>
-                  <?php } ?>
                         
-                  <?php if ($_SESSION['step'] == 8) { ?>
-                        <h2>Step 8 of 8</h2>
+                  <?php if ($_SESSION['step'] == 7) { ?>
+                        <h2>Step 7 of 7</h2>
                         <p>Installer is complete! 
                             Click <a href="index.php" target="_blank">here</a> to see your new wiki</p>
                         <p>If something went wrong, you can yet reconfigure all again.</p>

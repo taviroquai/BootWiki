@@ -9,7 +9,7 @@ class DatabaseDriversExists extends Requirement
 {
     public function __construct()
     {
-        $this->label   = 'SQLite or MySQL extension; Test connection';
+        $this->label   = 'SQLite or MySQL extension';
         $this->hint    = 'alt-get install libsqlite3-0 php5-sqlite php5-mysql & /etc/init.d/apache restart';
     }
     public function test()
