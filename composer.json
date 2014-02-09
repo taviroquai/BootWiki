@@ -1,4 +1,14 @@
 {
+    "name": "taviroquai/bootwiki",
+    "description": "A wiki built upon Twitter Bootstrap, Slim and RedBeanPHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Afonso",
+            "email": "mafonso333@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
     "require": {
         "slim/slim": "2.*",
         "gabordemooij/redbean": "dev-master",
