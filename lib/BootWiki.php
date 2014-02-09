@@ -211,17 +211,9 @@ class BootWiki {
         $content = new Content('How To Install', 
                 '<p>Dependencies: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git</p>
                 <p>How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:</p>
-                <p><code>
-                sudo su<br />
-                mkdir /var/www/bootwiki<br />
-                cd /var/www/bootwiki<br />
-                git clone https://github.com/taviroquai/BootWiki.git .<br />
-                ./install_bootwiki.sh<br />
-                Open config.php and change to your configuration, including MAIL configuration<br />
-                </code></p>
-                <p>Open http://localhost/bootwiki/install</p>
-                <p>Done!</p>
-                <p>Open http://url-to-bootwiki/install Login with admin user and admin password</p>');
+                <p>Download zip file from <a href="https://github.com/taviroquai/BootWiki">https://github.com/taviroquai/BootWiki</a> and extract to a folder as /var/www/bootwiki</p>
+                <p>Open in browser <strong>http://localhost/bootwiki</strong> and follow installer instructions</p>
+                <p>Login with admin user and admin password</p>');
         $content->intro = '<p>Follow the few steps to install on a DEBIAN / UBUNTU linux distribution</p>';
         $content->description = 'Follow the few steps to install on a DEBIAN / UBUNTU linux distribution';
         $content->keywords = 'wiki install steps ubuntu debian';

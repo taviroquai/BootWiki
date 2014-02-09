@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * Check for configuration and redirect to installer if needed
+ */
+$installer = false;
+if (!file_exists('config.php')) {
+    $installer = true;
+} elseif (filesize('config.php') < 1500) {
+    $installer = true;
+}
+if ($installer) {
+    if (!file_exists('installer.php')) die('Missing installer.php');
+    header('Location: installer.php');
+    die();
+}
+
 /*
  * Load configuration
  */
@@ -27,14 +42,6 @@ require_once 'lib/Layout.php';
  */
 BootWiki::init();
 $app = new \Slim\Slim();
-
-/*
- * Install demo data
- */
-$app->get('/install', function () use ($app) {
-    BootWiki::install();
-    $app->redirect(BASEURL);
-});
 
 /*
  * Homepage
@@ -354,7 +361,7 @@ $app->get('/mod/gallery', function () use ($app) {
     
     // Create Gallery
     $gallery = new Gallery();
-    $gallery->load();
+    $gallery->loadFolder(DATAPATH);
     
     // Print layout
     $app->response()->body((string)$gallery);

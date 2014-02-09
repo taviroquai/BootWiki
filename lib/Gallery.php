@@ -24,9 +24,9 @@ class Gallery extends Block {
     /**
      * Returns all available imagens in data folder
      */
-    public function load() {
+    public function loadFolder($path) {
         
-        $result = glob(DATAPATH.'/{*.jpg,*.gif,*.png}', GLOB_BRACE);
+        $result = glob($path.'/{*.jpg,*.gif,*.png}', GLOB_BRACE);
         if (!empty($result)) {
             foreach ($result as $item) {
                 $image = new Image($item);
