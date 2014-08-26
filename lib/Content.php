@@ -107,7 +107,8 @@ class Content extends Link {
         if (empty($version)) return false;
             
         $this->importBean($version);
-        $this->date = reset(explode(' ', $this->date));
+        $date_time = explode(' ', $this->date);
+        $this->date = reset($date_time);
         return $this;
     }
     
