@@ -218,7 +218,7 @@ class Content extends Link {
      * @return string
      */
     public function keywordsToLabels() {
-        $keywords = explode(' ', $this->keywords);
+        $keywords = explode(',', $this->keywords);
         $out = array();
         foreach ($keywords as $item) {
             $out[] = '<span class="label label-important">'.$item.'</span>';
@@ -232,7 +232,7 @@ class Content extends Link {
      * @return string
      */
     public function getKeywords($splitter = ',') {
-        return implode($splitter, explode(' ', $this->keywords));
+        return implode($splitter, explode($splitter, $this->keywords));
     }
     
     /**
