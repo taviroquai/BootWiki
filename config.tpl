@@ -27,6 +27,7 @@ define('DBPASS',    '{dbpass}');
  * SEO and Microdata (schema.org) configuration
  */
 define('IDIOM',                 '{idiom}');
+define('DATE_FORMAT',           '{date_format}');
 define('TITLE',                 '{title}');
 define('DESCRIPTION',           '{description}');
 define('KEYWORDS',              '{keywords}');

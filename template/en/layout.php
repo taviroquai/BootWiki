@@ -119,7 +119,7 @@
                     <li class="nav-header">Recent...</li>
                     <?php foreach ($this->recent as $item) { ?>
                       <li<?php if (!empty($item->class)) {?> class="<?=$item->class?>"<?php } ?>>
-                          <a href="<?=$item->href?>"><?=$item?> <span class="label wiki-date-min"><?=$item->date?></span></a>
+                          <a href="<?=$item->href?>"><?=$item?> <span class="label wiki-date-min"><?=date(DATE_FORMAT, strtotime($item->date))?></span></a>
                       </li>
                     <?php } ?>
                   </ul>

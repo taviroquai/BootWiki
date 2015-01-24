@@ -183,6 +183,11 @@
                             <input type="text" name="idiom" placeholder="en"
                                    value="<?=$_SESSION['step3']['idiom']?>"
                                    title="Default idiom">
+
+                            <label>Date Format (PHP date function)</label>
+                            <input type="text" name="date_format" placeholder="Y-m-d"
+                                   value="<?=$_SESSION['step3']['date_format']?>"
+                                   title="Default date format">
                             
                             <label>Default Page Title</label>
                             <input type="text" name="title" placeholder="Bootwiki"

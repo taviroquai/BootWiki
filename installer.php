@@ -37,13 +37,14 @@ $defaults = array(
         'dbpass'    => 'bootwiki'
     ),
     'step3' => array(
-        'idiom'     => 'en',
-        'title'     => 'Bootwiki',
+        'idiom'         => 'en',
+        'date_format'   => 'Y-m-d',
+        'title'         => 'Bootwiki',
         'description'   => 'BootWiki is a minimal wiki built upon Twitter Boostrap, RedBeanPHP and Slim Framework',
-        'keywords'  => 'wiki,boostrap,redbeanphp,slim',
-        'author'    => 'Author name',
-        'organization_name' => 'Organization name',
-        'organization_logo' => 'web/img/logo_bar.png',
+        'keywords'      => 'wiki,boostrap,redbeanphp,slim',
+        'author'        => 'Author name',
+        'organization_name'     => 'Organization name',
+        'organization_logo'     => 'web/img/logo_bar.png',
         'organization_founder'  => 'Founder\'s name'
      ),
     'step4' => array(

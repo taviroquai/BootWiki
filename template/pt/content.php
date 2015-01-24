@@ -7,7 +7,7 @@
     </h1>
     
     <p id="content_meta">
-        <em itemprop="lastReviewed" class="label"><?=$this->content->date?></em> 
+        <em itemprop="lastReviewed" class="label"><?=date(DATE_FORMAT, strtotime($this->content->date))?></em> 
         <?php if (is_object($this->content->author) && !empty($this->content->author->profile)) : ?>
             <a rel="author" href="<?=$this->content->author->profile?>" title="<?=$this->content->author?>">
                 <span class="label label-important"> por <?=$this->content->author?></span>
@@ -51,7 +51,7 @@
     <?php foreach ($this->versions as $item) { ?>
     <li>
         <a href="<?=BASEURL.'/edit/'.$this->content->alias.'/'.$item->id?>"><?=$item->title?></a> 
-        <span class="label wiki-label-min"><?=$item->date?></span>
+        <span class="label wiki-label-min"><?=date(DATE_FORMAT, strtotime($item->date))?></span>
     </li>
     <?php } ?>
 </div>
