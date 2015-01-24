@@ -1,10 +1,10 @@
 <div>
     <h1>Search Results</h1>
-    <? if (empty($this->items)) : ?>
+    <?php if (empty($this->items)) : ?>
     <p>Your search did not returned any results. Please try other keywords.</p>
-    <? else: ?>
+    <?php else: ?>
     <ul class="media-list">
-        <? foreach ($this->items as $item) { ?>
+        <?php foreach ($this->items as $item) { ?>
         <li class="media">
           <a class="pull-left" href="<?=BASEURL.'/'.$this->alias?>">
             <img class="media-object wiki-media-object-img" src="<?=$item->image->getThumbUrl()?>" />
@@ -18,7 +18,7 @@
           <hr />
           <div class="clearfix"></div>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
-    <? endif; ?>
+    <?php endif; ?>
 </div>

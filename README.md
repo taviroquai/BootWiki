@@ -11,6 +11,8 @@ How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:
 
 Download zip file from https://github.com/taviroquai/BootWiki and extract to a folder as /var/www/bootwiki
 
+Run at command line: php composer.phar install
+
 Open in browser http://localhost/bootwiki and follow installer instructions
 
 Comments and help are appreciated.

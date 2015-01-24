@@ -1,11 +1,11 @@
 <div>
     <h1>Register Complete!</h1>
     <p>Thank you for registering.</p>
-    <? if (SEND_MAILS) { ?>
+    <?php if (SEND_MAILS) { ?>
     <p>An email was sent with your login details.</p>
-    <? } ?>
+    <?php } ?>
     
-    <? if (!empty($this->message)) : ?>
+    <?php if (!empty($this->message)) : ?>
     <div class="control-group error" id="login_error">
       <div class="controls">
         <span class="help-inline"><?=$this->message?></span>
@@ -18,5 +18,5 @@
             }
         });
     </script>
-    <? endif; ?>
+    <?php endif; ?>
 </div>

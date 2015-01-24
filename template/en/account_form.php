@@ -1,13 +1,13 @@
 
 <h1>My Account</h1>
 
-<? if (BootWiki::hasMessage()) : ?>
+<?php if (BootWiki::hasMessage()) : ?>
 <div class="control-group error" id="login_error">
     <div class="controls">
         <span class="help-inline"><?=BootWiki::getMessage()?></span>
     </div>
 </div>
-<? endif; ?>
+<?php endif; ?>
 
 <h2>Change Account</h2>
 
@@ -34,4 +34,4 @@
     <label></label>
     <button type="submit">Change</button>
 </form>
-<? BootWiki::clearMessage(); ?>
+<?php BootWiki::clearMessage(); ?>

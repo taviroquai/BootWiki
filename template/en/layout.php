@@ -7,19 +7,19 @@
     <meta property="og:description" name="description" content="<?=$this->description?>">
     <meta name="twitter:description" content="<?=$this->description?>">
     <meta name="keywords" content="<?=$this->keywords?>">
-    <? if (is_object($this->author)) : ?>
+    <?php if (is_object($this->author)) : ?>
     <meta property="article:author" name="author" content="<?=$this->author->username?>">
-    <? else: ?>
+    <?php else: ?>
     <meta property="article:author" name="author" content="<?=$this->author?>">
-    <? endif; ?>
+    <?php endif; ?>
     <meta name="twitter:creator" content="<?=$this->author?>">
     <meta name="twitter:card" content="summary">
     <meta property="og:type" content="article" /> 
     <meta property="og:title" name="twitter:title" content="<?=$this->title?>" />
-    <? if (!empty($this->main_image)) { ?>
+    <?php if (!empty($this->main_image)) { ?>
     <meta property="og:image" name="twitter:image" content="<?=implode('', BootWiki::parseRoute())?><?=$this->main_image?>" />
     <link href="<?=$this->main_image?>" rel="image_src">
-    <? } ?>
+    <?php } ?>
     <base href="<?=BASEURL?>/">
 
     <!-- Le styles -->
@@ -65,31 +65,31 @@
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
                 
-                <? if (!empty($this->idioms)) {?>
-                    <? foreach ($this->idioms as $item) { ?>
+                <?php if (!empty($this->idioms)) {?>
+                    <?php foreach ($this->idioms as $item) { ?>
                         <a class="navbar-link" href="<?=$item->href()?>">
                           <?=$item->html()?>
                         </a>
-                    <? } ?>
-                <? } ?>
+                    <?php } ?>
+                <?php } ?>
                 
-                <? if (!empty($this->logged_username)) : ?>
+                <?php if (!empty($this->logged_username)) : ?>
                     Logged in as <a href="<?=BASEURL.'/mod/myaccount'?>" class="navbar-link"><?=$this->logged_username?></a>&nbsp;
                     <a href="<?=$this->logout_link->href?>" class="navbar-link">Logout</a>
-                <? else: ?>
+                <?php else: ?>
                     <a href="<?=$this->login_link->href?>" class="navbar-link">Login</a>
-                    <? if (REGISTER_ALLOWED) { ?>
+                    <?php if (REGISTER_ALLOWED) { ?>
                         <a href="<?=$this->register_link->href?>" class="navbar-link">Register</a>
-                    <? } ?>
-                <? endif; ?>
+                    <?php } ?>
+                <?php endif; ?>
                 
             </p>
             <ul class="nav">
-                <? foreach ($this->top_menu as $item) { ?>
-                <li<? if (!empty($item->class)) {?> class="<?=$item->class?>"<? } ?>>
+                <?php foreach ($this->top_menu as $item) { ?>
+                <li<?php if (!empty($item->class)) {?> class="<?=$item->class?>"<?php } ?>>
                     <a href="<?=$item->href?>"><?=$item?></a>
                 </li>
-                <? } ?>
+                <?php } ?>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -113,49 +113,49 @@
                 </div>
             </div><!--/.well -->
             
-            <? if (!empty($this->recent)) { ?>
+            <?php if (!empty($this->recent)) { ?>
                 <div class="well sidebar-nav">
                   <ul class="nav nav-list">
                     <li class="nav-header">Recent...</li>
-                    <? foreach ($this->recent as $item) { ?>
-                      <li<? if (!empty($item->class)) {?> class="<?=$item->class?>"<? } ?>>
+                    <?php foreach ($this->recent as $item) { ?>
+                      <li<?php if (!empty($item->class)) {?> class="<?=$item->class?>"<?php } ?>>
                           <a href="<?=$item->href?>"><?=$item?> <span class="label wiki-date-min"><?=$item->date?></span></a>
                       </li>
-                    <? } ?>
+                    <?php } ?>
                   </ul>
                 </div><!--/.well -->
-            <? } ?>
+            <?php } ?>
                 
-            <? if (!empty($this->popular)) { ?>
+            <?php if (!empty($this->popular)) { ?>
                 <div class="well sidebar-nav">
                   <ul class="nav nav-list">
                     <li class="nav-header">Most popular...</li>
-                    <? foreach ($this->popular as $item) { ?>
-                      <li<? if (!empty($item->class)) {?> class="<?=$item->class?>"<? } ?>>
+                    <?php foreach ($this->popular as $item) { ?>
+                      <li<?php if (!empty($item->class)) {?> class="<?=$item->class?>"<?php } ?>>
                           <a href="<?=$item->href?>"><?=$item?> <span class="badge badge-info wiki-visits-min"><?=(int)$item->visits?></span></a>
                       </li>
-                    <? } ?>
+                    <?php } ?>
                   </ul>
                 </div><!--/.well -->
-            <? } ?>
+            <?php } ?>
                 
-            <? if (!empty($this->unpublished)) { ?>
+            <?php if (!empty($this->unpublished)) { ?>
                 <div class="well sidebar-nav">
                   <ul id="wiki-unpublished" class="nav nav-list">
                     <li class="nav-header">Unpublished...</li>
-                    <? foreach ($this->unpublished as $item) { ?>
-                      <li<? if (!empty($item->class)) {?> class="<?=$item->class?>"<? } ?>>
+                    <?php foreach ($this->unpublished as $item) { ?>
+                      <li<?php if (!empty($item->class)) {?> class="<?=$item->class?>"<?php } ?>>
                           <a href="<?=$item->href?>"><?=$item?></a>
                       </li>
-                    <? } ?>
+                    <?php } ?>
                   </ul>
                 </div><!--/.well -->
-            <? } ?>
+            <?php } ?>
                                 
         </div><!--/span-->
         <div class="span9">
-            <? if (!empty($this->featured)) { ?>
-                <? $content = reset($this->featured); ?>
+            <?php if (!empty($this->featured)) { ?>
+                <?php $content = reset($this->featured); ?>
                 <div class="hero-unit">
                   <h1><a href="<?=BASEURL.'/'.$content->alias?>"><?=$content->title?></a></h1>
                   <div class="row">
@@ -169,17 +169,17 @@
                   <p>
                       <a href="<?=BASEURL.'/'.$content->alias?>" 
                         class="btn btn-primary pull-right"><?=$content->more_link?></a>
-                        <? if (is_object($content->author) && !empty($content->author->profile)) : ?>
+                        <?php if (is_object($content->author) && !empty($content->author->profile)) : ?>
                             <a class="pull-right" rel="author" href="<?=$content->author->profile?>" title="<?=$content->author?>">by <?=$content->author?>&nbsp;</a>
-                        <? else: ?>
+                        <?php else: ?>
                             <span class="pull-right"> by <?=$content->author?>&nbsp;</span>
-                        <? endif; ?>
+                        <?php endif; ?>
                   </p>
                 </div>
-            <? } ?>
-            <? if (!empty($this->featured) && count($this->featured) > 1) { ?>
+            <?php } ?>
+            <?php if (!empty($this->featured) && count($this->featured) > 1) { ?>
             <div class="row-fluid">
-                <? for ($i = 1; $i < count($this->featured); $i++) {
+                <?php for ($i = 1; $i < count($this->featured); $i++) {
                     $content = $this->featured[$i];
                     ?>
                 <div class="span<?=round(12/(count($this->featured)-1))?>">
@@ -190,17 +190,17 @@
                   <div class="clearfix"></div>
                   <a href="<?=BASEURL.'/'.$content->alias?>" class="btn btn-mini pull-right"><?=$content->more_link?></a>
                 </div><!--/span-->
-              <? } ?>
+              <?php } ?>
             </div><!--/row-->
             <hr />
-            <? } ?>
-            <? if (!empty($this->html)) { ?>
+            <?php } ?>
+            <?php if (!empty($this->html)) { ?>
                 <div class="row-fluid">
                   <div class="span12">
                     <?=$this->html?>
                   </div><!--/span-->
                 </div><!--/row-->
-          <? } ?>
+          <?php } ?>
         </div><!--/span-->
       </div><!--/row-->
     </div><!--/.fluid-container-->
@@ -219,7 +219,7 @@
     <script src="web/js/bootstrap-wysihtml5-0.0.2.js"></script>
     
     <!-- Include google analytics if exists -->
-    <? if (file_exists(TEMPLATEPATH.'/'.BootWiki::getIdiom().'/ga.php')) {
+    <?php if (file_exists(TEMPLATEPATH.'/'.BootWiki::getIdiom().'/ga.php')) {
         include TEMPLATEPATH.'/'.BootWiki::getIdiom().'/ga.php';
     } ?>
     

@@ -68,11 +68,11 @@
             <div class="well sidebar-nav">
               <ul class="nav nav-list">
                 <li class="nav-header">Installation Steps</li>
-                <? foreach ($steps as $item) { ?>
+                <?php foreach ($steps as $item) { ?>
                   <li>
                       <a href="<?=$item['url']?>"><?=$item['label']?> <!--<span class="label wiki-date-min">done</span>--></a>
                   </li>
-                <? } ?>
+                <?php } ?>
               </ul>
             </div><!--/.well -->
                                 

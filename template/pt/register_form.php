@@ -20,7 +20,7 @@
 
     <label></label>
 
-    <? if (BootWiki::hasMessage()) : ?>
+    <?php if (BootWiki::hasMessage()) : ?>
     <div class="control-group error" id="login_error">
       <div class="controls">
           <span class="help-inline"><?=BootWiki::getMessage()?></span>
@@ -33,9 +33,9 @@
             }
         });
     </script>
-    <? endif; ?>
+    <?php endif; ?>
 
     <input type="text" name="reserved" style="display: none" />
     <button type="submit">Registar</button>
 </form>
-<? BootWiki::clearMessage(); ?>
+<?php BootWiki::clearMessage(); ?>

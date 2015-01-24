@@ -17,12 +17,12 @@
 
             <div class="control-group">
                 <label class="control-label">Idioma</label>
-                <? foreach ($this->idioms as $item) { ?>
+                <?php foreach ($this->idioms as $item) { ?>
                 <label class="radio inline">
                     <input type="radio" name="content[idiom]" value="<?=$item->code?>"<?=$this->content->idiom->code == $item->code ? 'checked' : ''?>>
                     <?=$item->html()?>
                 </label>
-                <? } ?>
+                <?php } ?>
             </div>
 
             <div class="control-group">
@@ -73,11 +73,11 @@
             <label>Imagem</label>
             <div class="fileupload fileupload-new" data-provides="fileupload">
                 <div class="fileupload-new thumbnail span12">
-                <? if (!empty($this->content->image)) : ?>
+                <?php if (!empty($this->content->image)) : ?>
                     <img src="<?=$this->content->image?>" alt="<?=$this->content->title?>" />
-                <? else : ?>
+                <?php else : ?>
                     <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
-                <? endif; ?>
+                <?php endif; ?>
                 </div>
                 <div class="fileupload-preview fileupload-exists thumbnail span12"></div>
                 <div>
