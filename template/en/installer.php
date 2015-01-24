@@ -376,8 +376,9 @@
                         
                   <?php if ($_SESSION['step'] == 7) { ?>
                         <h2>Step 7 of 7</h2>
-                        <p>Installer is complete! 
-                            Click <a href="index.php" target="_blank">here</a> to see your new wiki</p>
+                        <p>Installer is complete!</p>
+                        <p>Use admin/admin as username/password to login</p>
+                        <p>Click <a href="index.php" target="_blank">here</a> to see your new wiki</p>
                         <p>If something went wrong, you can yet reconfigure all again.</p>
                         <p>IMPORTANTE: DO NOT FORGET TO REMOVE THIS INSTALL SCRIPT (installer.php) ONCE CONFIGURATION IS COMPLETE</p>
                   <?php } ?>
