@@ -210,13 +210,13 @@ class BootWiki {
 
         $content = new Content('How To Install', 
                 '<p>Dependencies: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git</p>
-                <p>How to install (DEBIAN/UBUNTU) under /var/www/bootwiki:</p>
-                <p>Download zip file from <a href="https://github.com/taviroquai/BootWiki">https://github.com/taviroquai/BootWiki</a> and extract to a folder as /var/www/bootwiki</p>
+                <p>How to install:</p>
+                <p>Download zip file from <a href="https://github.com/taviroquai/BootWiki">https://github.com/taviroquai/BootWiki</a> and extract to a folder as /var/www/html/bootwiki</p>
                 <p>Open in browser <strong>http://localhost/bootwiki</strong> and follow installer instructions</p>
                 <p>Login with admin user and admin password</p>');
-        $content->intro = '<p>Follow the few steps to install on a DEBIAN / UBUNTU linux distribution</p>';
-        $content->description = 'Follow the few steps to install on a DEBIAN / UBUNTU linux distribution';
-        $content->keywords = 'wiki install steps ubuntu debian';
+        $content->intro = '<p>Follow the few steps to install on linux</p>';
+        $content->description = 'Follow the few steps to install on linux';
+        $content->keywords = 'wiki install steps';
         $content->idiom = new Idiom($idiom_en->code);
         $content->featured = 1;
         $content->author = $account->username;
@@ -273,21 +273,12 @@ class BootWiki {
 
         $content = new Content('Como instalar', 
                 '<p>Dependências: Apache + PHP5.3 + Sqlite (or LAMP), Composer and Git</p>
-                <p>Como instalar (DEBIAN/UBUNTU) em /var/www/bootwiki:</p>
-                <p><code>
-                sudo su<br />
-                mkdir /var/www/bootwiki<br />
-                cd /var/www/bootwiki<br />
-                git clone https://github.com/taviroquai/BootWiki.git .<br />
-                ./install_bootwiki.sh<br />
-                Open config.php and change to your configuration, including MAIL configuration<br />
-                </code></p>
-                <p>Open http://localhost/bootwiki/install</p>
-                <p>Done!</p>
-                <p>Open http://url-to-bootwiki/install Login with admin user and admin password</p>');
-        $content->intro = '<p>Siga os simples passos de instalação para DEBIAN / UBUNTU</p>';
-        $content->description = 'Siga os simples passos de instalação para DEBIAN / UBUNTU';
-        $content->keywords = 'wiki install ubuntu debian';
+                <p>Como instalar:</p>
+                <p>Descarregue o ficheiro ZIP de <a href="https://github.com/taviroquai/BootWiki">https://github.com/taviroquai/BootWiki</a> e extraia para uma pasta do servidor web.</p>
+                <p>No browser, abra o endereço http://localhost/bootwiki e siga as instruções</p>');
+        $content->intro = '<p>Siga os simples passos de instalação para linux</p>';
+        $content->description = 'Siga os simples passos de instalação para linux';
+        $content->keywords = 'wiki install';
         $content->idiom = new Idiom($idiom_pt->code);
         $content->featured = 1;
         $content->author = $account->username;

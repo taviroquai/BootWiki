@@ -221,7 +221,7 @@ class Content extends Link {
         $keywords = explode(',', $this->keywords);
         $out = array();
         foreach ($keywords as $item) {
-            $out[] = '<span class="label label-important">'.$item.'</span>';
+            $out[] = '<span class="label label-danger">'.$item.'</span>';
         }
         return implode(' ', $out);
     }

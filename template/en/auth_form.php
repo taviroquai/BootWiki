@@ -2,19 +2,19 @@
 <h1>Login</h1>
 
 <form action="" method="post">
-    <label>Email</label>
-    <input name="username" type="text" value="" />
-    <label>Password</label>
-    <input name="password" type="password" />
+    <div class="form-group">
+        <label>Email</label>
+        <input name="username" type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input name="password" type="password" class="form-control" />
+    </div>
 
     <label></label>
 
     <?php if (BootWiki::hasMessage()) : ?>
-    <div class="control-group error" id="login_error">
-      <div class="controls">
-          <span class="help-inline"><?=BootWiki::getMessage()?></span>
-      </div>
-    </div>
+    <div class="bg-danger" id="login_error"><?=BootWiki::getMessage()?></div>
     <script>
         jQuery(function($) {
             for(i=0;i<3;i++) {
@@ -24,6 +24,6 @@
     </script>
     <?php endif; ?>
 
-    <button type="submit">Login</button>
+    <button class="btn btn-primary" type="submit">Login</button>
 </form>
 <?php BootWiki::clearMessage(); ?>

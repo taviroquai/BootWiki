@@ -2,20 +2,22 @@
 
     <h1 itemprop="headline" id="content_title"><a href="<?=BASEURL.'/'.$this->content->alias?>"><?=$this->content->title?></a>
         <?php if (BootWiki::getLoggedAccount()) : ?>
-        &nbsp;<a class="wiki-edit-link" href="<?=BASEURL.'/edit/'.$this->content->alias?>">edit</a>
+        &nbsp;<a class="label label-danger small" href="<?=BASEURL.'/edit/'.$this->content->alias?>">edit</a>
         <?php endif; ?>
     </h1>
     
     <p id="content_meta" class="well">
-        <em itemprop="lastReviewed" class="label"><?=date(DATE_FORMAT, strtotime($this->content->date))?></em> 
+        <span class="label label-warning">
+            <em itemprop="lastReviewed" class="label"><?=date(DATE_FORMAT, strtotime($this->content->date))?></em>
+        </span>&nbsp;
         <?php if (is_object($this->content->author) && !empty($this->content->author->profile)) : ?>
             <a rel="author" href="<?=$this->content->author->profile?>" title="<?=$this->content->author?>">
-                <span class="label label-important"> by <?=$this->content->author?></span>
+                <span class="label label-success"> by <?=$this->content->author?></span>
             </a>
         <?php else: ?>
-            <span class="label label-important"> by <?=$this->content->author?></span>
+            <span class="label label-success"> by <?=$this->content->author?></span>
         <?php endif; ?>
-        <span class="badge badge-info"><?=$this->content->visits?> visits</span>
+        <span class="label label-info"><?=$this->content->visits?> visits</span>
         <meta itemprop="interactionCount" content="<?=$this->content->visits?> UserPageVisits">
         <meta itemprop="author" content="<?=$this->content->author?>" 
               <?php if (is_object($this->content->author)) { ?>
@@ -51,7 +53,7 @@
     <?php foreach ($this->versions as $item) { ?>
     <li>
         <a href="<?=BASEURL.'/edit/'.$this->content->alias.'/'.$item->id?>"><?=$item->title?></a> 
-        <span class="label wiki-label-min"><?=date(DATE_FORMAT, strtotime($item->date))?></span>
+        <span class="label label-warning small"><?=date(DATE_FORMAT, strtotime($item->date))?></span>
     </li>
     <?php } ?>
 </div>

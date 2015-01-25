@@ -6,11 +6,7 @@
     <?php } ?>
     
     <?php if (!empty($this->message)) : ?>
-    <div class="control-group error" id="login_error">
-      <div class="controls">
-        <span class="help-inline"><?=$this->message?></span>
-      </div>
-    </div>
+    <div class="bg-danger" id="login_error"><?=$this->message?></div>
     <script>
         jQuery(function($) {
             for(i=0;i<3;i++) {
