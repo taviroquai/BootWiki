@@ -18,6 +18,22 @@ require_once 'lib/Requirement/DatabaseDriversExists.php';
 require_once 'lib/Requirement/DatabaseConnection.php';
 
 /**
+ * Check for composer dependencies
+ */
+if (!is_dir('vendor') || count(glob('vendor/*')) == 0) {
+    echo '<h1>Missing composer dependencies</h1>';
+    echo '<p>Trying to install with: php composer.phar install -n -d ' . getcwd() .' 2>&1</p>';
+    putenv("COMPOSER_HOME=".getcwd());
+    $out = shell_exec('php composer.phar install -n -d ' . getcwd() .' 2>&1');
+    echo "<p>Result: $out";
+    if (empty($out)) {
+        echo "<p>Install composer dependencies failed. Please run manually: php composer.phar install";
+    }
+    echo "<p>Click <a href=\"installer.php\">here</a> to retry install...</p>";
+    die();
+}
+
+/**
  * Setup configuration defaults
  */
 $defaults = array(
